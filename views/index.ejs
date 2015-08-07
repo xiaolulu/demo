@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title><%= title %></title>
+
+<script>
+</script>
+</head>
+<body>
+<header class="clearfix">
+   <h1><a href="/"> 我的nodejs项目</a></h1>
+   <menu>    
+        <a class="menuLink beforeLogin" href="/register">注册</a>
+        <a class="menuLink beforeLogin" href="/login">登录</a>
+        <a class="menuLink afterLogin menu_username" href="/user/center"></a>
+        <a class="menuLink afterLogin" href="/logout">退出</a>
+    </menu>
+</header>
+<section class="wrapper">
+
+    <form class="form" id="registerForm">
+        <h2>首页</h2>
+        <ul class="nav">
+            <li><a href="/user/center">用户中心</a></li>
+            <li><a href="/user/info">用户信息</a></li>
+            <li><a href="/user/blog">用户博客</a></li>
+        </ul>
+    </form>
+
+</body>
+</html>

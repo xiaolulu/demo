@@ -1,0 +1,13 @@
+{
+	"name": "qjdwechat",
+	"dependencies":{
+		"express": "*",
+		"ejs": "*",
+		"wechat": "*",
+		"wechat-api": "*",
+		"mongoose": "*",
+		"log4js": "*",
+		"xml2js": "*"
+	}
+}
+
