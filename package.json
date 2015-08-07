@@ -5,6 +5,7 @@
 		"ejs": "*",
 		"wechat": "*",
 		"wechat-api": "*",
+		"body-parser": "*",
 		"mongoose": "*",
 		"log4js": "*",
 		"xml2js": "*"
