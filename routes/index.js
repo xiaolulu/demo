@@ -32,7 +32,7 @@ exports.all = function( app ){
 			bufferData.concat( chuck );
 		} );
 		req.on( 'end', function(){
-			//var xmlStr = bufferData.toBuffer().toString();
+			var xmlStr = bufferData.toBuffer().toString();
 			xml2js.parseString(xmlStr, { explicitArray : false, ignoreAttrs : true }, function (err, result) {
 				console.log(JSON.stringify(result));
 			})
@@ -56,7 +56,7 @@ exports.all = function( app ){
     app.post('/register', function( req, res ){
         issue.registerUser( req, res );
     });
-    app.get( '/user/apply', function( req, res ){
+    app.get( '/user/join', function( req, res ){
         user.center( req, res );
     });
     app.get( '/user/partner', function( req, res ){
