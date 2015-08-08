@@ -1,0 +1,23 @@
+
+.loginForm label{
+	display: block;
+	position: relative;
+	padding: 0px;
+	margin: 10px 0;
+}
+
+.loginForm label tt{
+	position: absolute;
+}
+
+.loginForm .input_text{
+	width: 100%;
+	height: 24px;
+	line-height: 24px;
+}
+
+.loginForm button{
+	height: 34px;
+	line-height: 28px;
+	width: 100%;
+}
