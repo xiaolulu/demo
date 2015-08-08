@@ -32,44 +32,53 @@ var tmp = {
 	text: ['<xml>',
 			'<ToUserName><![CDATA[{toUser}]]></ToUserName>',
 			'<FromUserName><![CDATA[{fromUser}]]></FromUserName>',
-			'<CreateTime>{12345678}</CreateTime>',
-			'<MsgType><![CDATA[{text}]]></MsgType>',
+			'<CreateTime>12345678</CreateTime>',
+			'<MsgType><![CDATA[text]]></MsgType>',
 			'<Content><![CDATA[{content}]]></Content>',
 			'</xml>'].join('')
 }
 
 var replay = {};
 
+replay.event = function( req, res, config, cb ){
+	cb();	
+}
+
 replay.text = function( req, res, config ){
 	var data = {
 		toUser: config.FromUserName,
-		fromUser: config.fromUser,
+		fromUser: config.ToUserName,
 		content: '你好'
 	}
 	var _html = tmp['text'].replace( /\{(.*?)\}/g, function( $1, $2 ){
 				return data[ $2 ];
 			});
-
+	console.log( _html );
 	res.send( _html );
 
 }
 
 exports.all = function( app ){
     app.use( function( req, res, next){	
-		var bufferData = new BufferHelper();
-		gadget.logInfo.info( req.path );
 		console.log( req.path );
+		if( req.path != '/' ){
+			next();
+			return;
+		}
+		var bufferData = new BufferHelper();
 		req.on( 'data', function( chuck ){
 			bufferData.concat( chuck );
 		} );
 		req.on( 'end', function(){
 			var xmlStr = bufferData.toBuffer().toString();
 			xml2js.parseString(xmlStr, { explicitArray : false, ignoreAttrs : true }, function (err, result) {
-				var ret = JSON.stringify(result);
-				replay[ ret.xml.MsgType ]( req, res, ret.xml ); 
+				var ret = result;
+				console.log( ret );
+				console.log(  typeof ret );
+				replay[ ret.xml.MsgType ]( req, res, ret.xml, function(){ next()} ); 
 			})
 		})
-		next();
+		//next();
         
     })
     app.get( '/', function( req, res ){
