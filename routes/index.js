@@ -1,4 +1,4 @@
-debugger
+
 var issue = require( './issue' ),
 	user = require( './user' ),
 	domain = require( 'domain' ),
@@ -112,10 +112,10 @@ exports.all = function( app ){
         issue.registerUser( req, res );
     });
     app.get( '/user/join', function( req, res ){
-        user.center( req, res );
+        user.join( req, res );
     });
     app.get( '/user/partner', function( req, res ){
-        user.blog( req, res );
+        user.partner( req, res );
     });
     app.get( '/user/info', function( req, res ){
         user.info( req, res );
