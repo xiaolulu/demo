@@ -59,7 +59,7 @@ replay.text = function( req, res, config ){
 }
 
 function checkPower(){
-	return true;
+	return false;
 }
 
 var needLogin = {
