@@ -1,15 +1,15 @@
 
-var siteTitle = '优品开源',
+var siteTitle = '仟金顶网络科技',
       pageTitle = {
 		    '/': '首页',
 		    '/index': '首页',
 		    '/register': '注册',
 		    '/login': '登录',
-		    '/user/center': '用户中心',
-		    '/user/info': '用户信息',
-		    '/user/blog': '用户博客'
+		    '/user/join': '会员申请',
+		    '/user/info': '会员信息',
+		    '/user/partner': '合作厂家'
 	    },
-       basePath = 'http://www.mynodejs.com'; 
+       basePath = 'http://wx.upopen.com'; 
 
 module.exports = {
 	siteTitle: siteTitle,

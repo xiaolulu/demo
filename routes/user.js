@@ -1,19 +1,19 @@
 var site = require( '../config/site' );
-function center( req, res ){
-    res.render( 'user/center.ejs', site.setting( req ) );
+function join( req, res ){
+    res.render( 'user/join.ejs', site.setting( req ) );
 }
 
 function info( req, res ){
     res.render( 'user/info.ejs', site.setting( req ) );
 }
 
-function blog( req, res ){
-    res.render( 'user/blog.ejs', site.setting( req ) );
+function partner( req, res ){
+    res.render( 'user/partner.ejs', site.setting( req ) );
 }
 
 
 module.exports = {
-    center: center,
+    join: join,
     info: info,
-    blog: blog
+    partner: partner
 }
