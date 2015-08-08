@@ -1,10 +1,14 @@
 define( function(){
-    var username = $.cookies.get( 'username' );
+    wx.config({
+		debug: true,
+		appId: 'wxfb96cc74703eb978',
+		timestamp: '',
+		nonceStr: '',
+		signature: '',
+		jsApiList: []
+	});
 
-    if( username ){
-          $( '.afterLogin' ).show();
-        $( '.menu_username' ).html( username );
-    } else {
-        $( '.beforeLogin' ).show();
-    }
+	wx.error( function( res ){
+		console.log( res );
+	});
 })

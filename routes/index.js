@@ -90,7 +90,6 @@ exports.all = function( app ){
 				replay[ ret.xml.MsgType ]( req, res, ret.xml, function(){ next()} ); 
 			})
 		})
-		//next();
         
     })
     app.get( '/', function( req, res ){

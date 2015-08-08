@@ -8,6 +8,11 @@ require.config({
 })
 
 define( ['md5', 'all'], function( md5 ){
+	
+	wx.ready( function(){
+		
+	});
+
     $( '#loginForm' ).on( 'submit', function(){
         var data = {
             username: $('#username').val(),
