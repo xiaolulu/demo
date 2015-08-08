@@ -58,11 +58,25 @@ replay.text = function( req, res, config ){
 
 }
 
+function checkPower(){
+	return true;
+}
+
+var needLogin = {
+	'/user/join': 1,
+	'/user/info': 1,
+	'/user/partner': 1
+}
+
 exports.all = function( app ){
     app.use( function( req, res, next){	
 		console.log( req.path );
 		if( req.path != '/' ){
-			next();
+			if( needLogin[ req.path ] && !checkPower() ){
+				res.redirect( '/login' );
+			} else {
+				next();
+			}
 			return;
 		}
 		var bufferData = new BufferHelper();
