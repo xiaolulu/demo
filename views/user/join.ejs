@@ -1,10 +1,30 @@
 <% include ../common/header.ejs %>
-   <form class="form" id="registerForm">
-        <h2>用户中心</h2>
-        <ul class="nav">
-            <li><a href="/user/center">用户中心</a></li>
-            <li><a href="/user/info">用户信息</a></li>
-            <li><a href="/user/blog">用户博客</a></li>
-        </ul>
+   <form class="form userjoinForm" id="registerForm">
+		<label class="clearfix"><tt>公司名称</tt><input type="text" class="input_text" id="username" /></label>
+		<label class="clearfix"><tt>注册时间</tt>
+			<select>
+				<option>2015年</option>
+			</select>
+		</label>
+		<label class="clearfix"><tt>人员规模</tt>
+			<select>
+				<option>10-50人</option>
+			</select>
+		</label>
+		<label class="clearfix"><tt>办公地址</tt><input type="text" class="input_text" id="username" /></label>
+		<label class="clearfix"><tt>详细地址</tt><input type="text" class="input_text" id="username" /></label>
+		<label class="clearfix"><tt>工商注册号</tt><input type="text" class="input_text" id="username" /></label>
+		<label class="clearfix"><tt>经营品类</tt><input type="text" class="input_text" id="username" /></label>
+		<label class="clearfix"><tt>品类厂家</tt>
+			<select>
+				<option>厨房电器</option>
+			</select>
+		</label>
+		<label class="clearfix"><tt>法定代表人</tt><input type="text" class="input_text" id="username" /></label>
+		<label class="clearfix"><tt>身份证号</tt><input type="text" class="input_text" id="username" /></label>
+		<label class="clearfix"><tt>常用联系人</tt><input type="text" class="input_text" id="username" /></label>
+		<label class="clearfix"><tt>手机号码</tt><input type="text" class="input_text" id="username" /></label>
+		
+        <label class="clearfix"><button type="submit" class="btn">提交申请</button></label>
     </form>
 <% include ../common/footer.ejs %>
