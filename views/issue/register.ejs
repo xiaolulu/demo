@@ -1,11 +1,12 @@
 <% include ../common/header.ejs %>
-   <form class="form" id="registerForm">
-        <label><tt>用户名:</tt><input type="text" class="input_text" id="username" /></label>
-		<p id="usernameTip" class="textTip"></p>
-         <label><tt>密码:</tt><input type="password" class="input_text" id="password" /></label>
-		<p id="passwordTip" class="textTip"></p>
-         <label><tt>邮件:</tt><input type="text" class="input_text" id="email" /></label>
-		<p id="emailTip" class="textTip"></p>
-        <button type="submit" class="btn">注册</button>
+   <form class="form registerForm" id="registerForm">
+		<label><tt></tt><input type="text" class="input_text" id="username" /></label>
+		<label class="clearfix">
+			<tt></tt>
+			<input type="password" class="input_text password fl" id="password" />
+			<input type="button" class="code fr" value="获取短信验证码" />
+		</label>
+		<label><tt></tt><input type="text" class="input_text" id="email" /></label>
+        <label><button type="submit" class="btn">注册</button></label>
     </form>
 <% include ../common/footer.ejs %>

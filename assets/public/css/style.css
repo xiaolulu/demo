@@ -19,15 +19,12 @@
 .clearfix { display: inline-table; }
 * html .clearfix { height: 1%; }
 .clearfix { display: block; }
+.fl{ float: left }
+.fr{ float: right }
 /****************************/
-
 body{
     background: #afafaf;
 }
-header{
-    
-}
-
 /***************************************************************/
 .wrapper{
 	padding: 10px;
