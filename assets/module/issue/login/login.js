@@ -20,7 +20,7 @@ define( ['md5', 'all'], function( md5 ){
 			  data: data,
             success: function( ret ){
                     if( ret.code == 0){
-                      $.cookies.set( 'username', data.username );
+                      	$.cookies.set( 'username', data.username );
                         window.location.href = '/user/center';
                     } 
             }

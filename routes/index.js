@@ -87,8 +87,6 @@ exports.all = function( app ){
 			var xmlStr = bufferData.toBuffer().toString();
 			xml2js.parseString(xmlStr, { explicitArray : false, ignoreAttrs : true }, function (err, result) {
 				var ret = result;
-				console.log( ret );
-				console.log(  typeof ret );
 				replay[ ret.xml.MsgType ]( req, res, ret.xml, function(){ next()} ); 
 			})
 		})

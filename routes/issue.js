@@ -1,13 +1,12 @@
 
 var site = require( '../config/site' ),
-        user = require( '../controls/user' );
+    user = require( '../lib/user' );
 
 function index( req, res ){
     res.render( 'issue/index.ejs', site.setting( req, '/issue/index', '/index' ) );
 }
 
 function register( req, res ){
-	console.log( 'reqpath');
     res.render( 'issue/register.ejs', site.setting( req, '/issue' ) );
 }
 

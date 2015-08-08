@@ -11,7 +11,7 @@ define( ['md5', 'validate', 'all'], function( md5, validate ){
 
 	var username = $( '#username' ),
 		password = $( '#password' ),
-		email = $( '#email' );
+		code = $( '#code' );
 
 	var usernameRule = [{
 			'noBlank': '请输入用户名',
@@ -30,32 +30,33 @@ define( ['md5', 'validate', 'all'], function( md5, validate ){
 		}, function( prompt ){
 			$( '#passwordTip' ).html( prompt );
 		}],
-		emailRule = [{
+		codeRule = [{
 			'noBlank': '请输入注册邮箱',
 			'typeEmail': '邮箱格式不正确'
 		}, function( prompt ){
-			$( '#emailTip' ).html( prompt );
+			$( '#codeTip' ).html( prompt );
 		}];
-
+	/*
 	validate( username, [ 'change' ], usernameRule );
 	validate( password, [ 'change' ], passwordRule );
-	validate( email, [ 'change' ], emailRule );
+	validate( code, [ 'change' ], codeRule );
+	*/
 
     $( '#registerForm' ).on( 'submit', function(){
         var data = {
-            username: $('#username').val(),
-            password: md5.hex_md5( $('#password').val() ),
-            email: $('#email').val()  
+            username: username.val(),
+            password: md5.hex_md5( password.val() ),
+            code: code.val()  
         }
         $.ajax({
-            url: '/register?a=1',
+            url: '/register',
             type: 'post',
-			  dataType: 'json',
-			  data: data,
+			dataType: 'json',
+			data: data,
             success: function( ret ){
                 if( ret.code == 0 ){
-                        alert( '注册成功' )
-                    window.location.href="/login";            
+                    alert( '注册成功' )
+                    window.location.href="/user/join";            
                 }   
             }
         });
