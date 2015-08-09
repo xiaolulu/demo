@@ -15,21 +15,26 @@ define( function(){
 	function getHrefParam( key ){
 		var params = location.search.substr(1).split('&'),
 			item,
-			val;
+			i = 0;
 		while( item = params[i] ){
 			item = item.split( '=' );
 			if( item[0] == key ){
 				return item[1]
 			}
+			i++;
 		}
 		return null;
 	}
 	function getOpenid(){
 		var code = getHrefParam( 'code' );
-		alert( code );
+		//alert( code );
+		$('#username').val(code);
+		return;
 		$.ajax( {
 			url: 'https://api.weixin.qq.com/sns/oauth2/access_token',
 			type: 'get',
+			dataType: 'jsonp',
+			jsonp: 'jsoncallback',
 			data: {
 					appid: 'wxfb96cc74703eb978',
 					secret: 'd49d5f6febd267637d85c56af4370bce',
@@ -42,6 +47,6 @@ define( function(){
 		} );
 	}
 
-	getOpenId();
+	getOpenid();
 
 })

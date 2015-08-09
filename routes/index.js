@@ -10,7 +10,7 @@ var issue = require( './issue' ),
 
 var Domain = domain.create();
 
-token.get();
+//token.get();
 
 function xml2Json( xml ){
 	

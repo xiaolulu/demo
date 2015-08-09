@@ -8,7 +8,7 @@ require.config({
 })
 
 define( ['md5', 'all'], function( md5 ){
-	alert( location.href );
+	//alert( location.href );
 	wx.ready( function(){
 		
 	});
