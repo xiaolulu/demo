@@ -31,15 +31,10 @@ define( function(){
 		$('#username').val(code);
 		return;
 		$.ajax( {
-			url: 'https://api.weixin.qq.com/sns/oauth2/access_token',
+			url: '/wechat/getOpenid',
 			type: 'get',
-			dataType: 'jsonp',
-			jsonp: 'jsoncallback',
 			data: {
-					appid: 'wxfb96cc74703eb978',
-					secret: 'd49d5f6febd267637d85c56af4370bce',
-					code: code,
-					'grant_type': 'authorization_code'				
+					code: code		
 				},
 			success: function( ret ){
 				alert( ret );

@@ -21,8 +21,8 @@ define( ['md5', 'all'], function( md5 ){
         $.ajax({
             url: '/login',
             type: 'post',
-			  dataType: 'json',
-			  data: data,
+			dataType: 'json',
+			data: data,
             success: function( ret ){
                     if( ret.code == 0){
                       	$.cookies.set( 'username', data.username );

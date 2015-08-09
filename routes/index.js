@@ -117,4 +117,10 @@ exports.all = function( app ){
     app.get( '/user/info', function( req, res ){
         user.info( req, res );
     });
+
+	app.get( '/wechat/getOpenid', function( req, res ){
+		token.getOpenId( req.query.code, function( data ){
+			res.send( data );
+		} );
+	})
 }
