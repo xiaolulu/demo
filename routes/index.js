@@ -21,8 +21,6 @@ Domain.on( 'error', function( e ){
 	console.log( 'error' + e );
 })
 
-var xmlStr = '<xml><ToUserName><![CDATA[toUser]]></ToUserName><FromUserName><![CDATA[fromUser]]></FromUserName><CreateTime>1351776360</CreateTime><MsgType><![CDATA[link]]></MsgType><Title><![CDATA[公众平台官网链接]]></Title><Description><![CDATA[公众平台官网链接]]></Description><Url><![CDATA[url]]></Url><MsgId>1234567890123456</MsgId></xml> ';
-
 var path = {
 	'text': 'text',
 	'event': 'event'
@@ -71,6 +69,7 @@ var needLogin = {
 exports.all = function( app ){
     app.use( function( req, res, next){	
 		console.log( req.path );
+		console.log( req.query );
 		if( req.path != '/' ){
 			if( needLogin[ req.path ] && !checkPower() ){
 				res.redirect( '/login' );
