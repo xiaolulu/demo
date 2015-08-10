@@ -11,6 +11,7 @@ define( function(){
 	wx.error( function( res ){
 		console.log( res );
 	});
+	alert( $.cookies.get( 'openid' ));
 
 	function getHrefParam( key ){
 		var params = location.search.substr(1).split('&'),
@@ -42,6 +43,6 @@ define( function(){
 		} );
 	}
 
-	getOpenid();
+	//getOpenid();
 
 })

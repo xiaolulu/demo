@@ -11,7 +11,7 @@ var issue = require( './issue' ),
 
 var Domain = domain.create();
 
-token.get();
+//token.get();
 
 function xml2Json( xml ){
 	
@@ -86,10 +86,21 @@ exports.all = function( app ){
 		console.log( req.path );
 		console.log( req.query );
 		console.log( '***********************************' );
-		var openid = tool.getCookie( req.headers.cookies, 'openid' );
-		if( !openid ){
+		if( req.path == '/' ){
+			res.send('1');
+			return;
+		}
+		var openid = tool.getCookie( req.headers.cookie, 'openid' );
+		console.log( openid );
+		console.log( typeof openid );
+		console.log( 'cookies ============================')
+		console.log( req.headers)
+		if( !openid || openid == 'undefined' ){
+			console.log( 'code =================');
+			console.log( req.query.code );
 			token.getOpenid( req.query.code, function( data ){
-				res.setHeader( 'Set-Cookie', 'openid=data');
+				res.setHeader( 'Set-Cookie', 'openid='+data.openid+';path=/;');
+				console.log( data.openid );
 				if( req.path != '/' ){
 					if( needLogin[ req.path ] && !checkPower() ){
 						res.redirect( '/login' );
