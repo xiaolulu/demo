@@ -66,20 +66,6 @@ var needLogin = {
 	'/user/partner': 1
 }
 
-/*
-var bufferData = new BufferHelper();
-		req.on( 'data', function( chuck ){
-			bufferData.concat( chuck );
-		} );
-		req.on( 'end', function(){
-			var xmlStr = bufferData.toBuffer().toString();
-			xml2js.parseString(xmlStr, { explicitArray : false, ignoreAttrs : true }, function (err, result) {
-				var ret = result;
-				replay[ ret.xml.MsgType ]( req, res, ret.xml, function(){ next()} ); 
-			})
-		})
-*/
-
 exports.all = function( app ){
     app.use( function( req, res, next){	
 		console.log( 'app.user ==========================' );
@@ -87,45 +73,37 @@ exports.all = function( app ){
 		console.log( req.query );
 		console.log( '***********************************' );
 		if( req.path == '/' ){
-			res.send('1');
+			var bufferData = new BufferHelper();
+			req.on( 'data', function( chuck ){
+				bufferData.concat( chuck );
+			} );
+			req.on( 'end', function(){
+				var xmlStr = bufferData.toBuffer().toString();
+				xml2js.parseString(xmlStr, { explicitArray : false, ignoreAttrs : true }, function (err, result) {
+					var ret = result;
+					replay[ ret.xml.MsgType ]( req, res, ret.xml, function(){ next()} ); 
+				})
+			})
 			return;
 		}
 		var openid = tool.getCookie( req.headers.cookie, 'openid' );
-		console.log( openid );
-		console.log( typeof openid );
-		console.log( 'cookies ============================')
-		console.log( req.headers)
+		console.log( 'openid === ' + openid );
 		if( !openid || openid == 'undefined' ){
-			console.log( 'code =================');
-			console.log( req.query.code );
 			token.getOpenid( req.query.code, function( data ){
 				res.setHeader( 'Set-Cookie', 'openid='+data.openid+';path=/;');
-				console.log( data.openid );
 				if( req.path != '/' ){
 					if( needLogin[ req.path ] && !checkPower() ){
 						res.redirect( '/login' );
 					} else {
 						next();
 					}
-					return;
 				}
 			} );
-			return;
-		}
-		if( req.path != '/' ){
-			if( needLogin[ req.path ] && !checkPower() ){
-				res.redirect( '/login' );
-			} else {
-				next();
-			}
-			return;
-		}
-		
+		} else {
+			next()
+		}		
         
     })
-    app.get( '/', function( req, res ){
-		issue.index( req, res );
-    });
     app.get( '/login', function( req, res ){		
         issue.login( req, res );
     });
