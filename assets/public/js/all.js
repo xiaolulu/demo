@@ -29,7 +29,6 @@ define( function(){
 	function getOpenid(){
 		var code = getHrefParam( 'code' );
 		alert( code );
-		//$('#username').val(code);
 		$.ajax( {
 			url: '/wechat/getOpenid',
 			type: 'get',

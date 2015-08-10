@@ -11,7 +11,7 @@ function register( req, res ){
 }
 
 function registerUser( req, res ){
-    user.addUser( req, res );
+    user.register( req, res );
 }
 
 function login( req, res ){
@@ -19,7 +19,7 @@ function login( req, res ){
 }
 
 function loginUser( req, res ){
-    user.findUser( req, res );
+    user.login( req, res );
 }
 
 module.exports = {

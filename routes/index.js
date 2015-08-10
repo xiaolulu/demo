@@ -6,6 +6,7 @@ var issue = require( './issue' ),
 	BufferHelper = require( 'BufferHelper' ),
 	xml2js = require( 'xml2js' ),
 	token = require( '../lib/token' ),
+	redis = require( '../tool/redis' );
 	tool = require( '../lib/tool' ),
 	gadget = require( '../tool/gadget' );
 
@@ -56,12 +57,12 @@ replay.text = function( req, res, config ){
 
 }
 
-function checkPower(req){
-	console.log( 'checkPower');
-	var _login = tool.getCookie( req.headers.cookie, 'hasLogin' );
-	console.log( _login );
-	return _login;
-}
+function isBinded( key, cb ){
+		redis.get( key, function( reply ){
+			tool.logInfo.info( '[index] isOnline get reply ' + reply );
+			cb( reply );
+		});
+	}
 
 
 var needLogin = {
@@ -95,21 +96,28 @@ exports.all = function( app ){
 		if( !openid || openid == 'undefined' ){
 			token.getOpenid( req.query.code, function( data ){
 				res.setHeader( 'Set-Cookie', 'openid='+data.openid+';path=/;');
-					if( needLogin[ req.path ] && !checkPower(req) ){
-						console.log( 'toLogin' );
-						res.redirect( '/login' );
-					} else {
-						next();
-					}
+				if( needLogin[ req.path ] ){
+					isBinded( openid, function( ret ){
+						if( !ret ){
+							console.log( 'toLogin' );
+							res.redirect( '/login' );
+						} else {
+							next();
+						}
+					})
+				}
 			} );
 		}		
-		 if( needLogin[ req.path ] && !checkPower(req) ){
-                       console.log( 'toLogin' );
-                       res.redirect( '/login' );
-                 } else {
-	                  next();
-                  }
-
+		if( needLogin[ req.path ] ){
+			isBinded( openid, function( ret ){
+				if( !ret ){
+					console.log( 'toLogin' );
+					res.redirect( '/login' );
+				} else {
+					next();
+				}
+			})
+		}
         
     })
     app.get( '/login', function( req, res ){		
