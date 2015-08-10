@@ -29,7 +29,7 @@ define( ['md5', 'all'], function( md5 ){
             success: function( ret ){
                     if( ret.code == 0){
                       	$.cookies.set( 'username', data.username );
-                        window.location.href = '/user/center';
+                        window.location.href = '/user/info';
                     } 
             }
         });

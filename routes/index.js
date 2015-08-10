@@ -56,9 +56,13 @@ replay.text = function( req, res, config ){
 
 }
 
-function checkPower(){
-	return 0;
+function checkPower(req){
+	console.log( 'checkPower');
+	var _login = tool.getCookie( req.headers.cookie, 'hasLogin' );
+	console.log( _login );
+	return _login;
 }
+
 
 var needLogin = {
 	'/user/join': 1,
@@ -91,7 +95,7 @@ exports.all = function( app ){
 		if( !openid || openid == 'undefined' ){
 			token.getOpenid( req.query.code, function( data ){
 				res.setHeader( 'Set-Cookie', 'openid='+data.openid+';path=/;');
-					if( needLogin[ req.path ] && !checkPower() ){
+					if( needLogin[ req.path ] && !checkPower(req) ){
 						console.log( 'toLogin' );
 						res.redirect( '/login' );
 					} else {
@@ -99,7 +103,7 @@ exports.all = function( app ){
 					}
 			} );
 		}		
-		 if( needLogin[ req.path ] && !checkPower() ){
+		 if( needLogin[ req.path ] && !checkPower(req) ){
                        console.log( 'toLogin' );
                        res.redirect( '/login' );
                  } else {
