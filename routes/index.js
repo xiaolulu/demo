@@ -6,6 +6,7 @@ var issue = require( './issue' ),
 	BufferHelper = require( 'BufferHelper' ),
 	xml2js = require( 'xml2js' ),
 	token = require( '../lib/token' ),
+	tool = require( '../lib/tool' ),
 	gadget = require( '../tool/gadget' );
 
 var Domain = domain.create();
@@ -65,25 +66,8 @@ var needLogin = {
 	'/user/partner': 1
 }
 
-exports.all = function( app ){
-    app.use( function( req, res, next){	
-		console.log( 'app.user ==========================' );
-		console.log( req.path );
-		console.log( req.query );
-		console.log( '***********************************' );
-
-		if( req.path != '/' ){
-			if( needLogin[ req.path ] && !checkPower() ){
-				token.getOpenid( req.query.code, function( data ){
-					res.setHeader( 'Set-Cookie', 'openid=data');
-					res.redirect( '/login' );
-				} );
-			} else {
-				next();
-			}
-			return;
-		}
-		var bufferData = new BufferHelper();
+/*
+var bufferData = new BufferHelper();
 		req.on( 'data', function( chuck ){
 			bufferData.concat( chuck );
 		} );
@@ -94,6 +78,38 @@ exports.all = function( app ){
 				replay[ ret.xml.MsgType ]( req, res, ret.xml, function(){ next()} ); 
 			})
 		})
+*/
+
+exports.all = function( app ){
+    app.use( function( req, res, next){	
+		console.log( 'app.user ==========================' );
+		console.log( req.path );
+		console.log( req.query );
+		console.log( '***********************************' );
+		var openid = tool.getCookie( req.headers.cookies, 'openid' );
+		if( !openid ){
+			token.getOpenid( req.query.code, function( data ){
+				res.setHeader( 'Set-Cookie', 'openid=data');
+				if( req.path != '/' ){
+					if( needLogin[ req.path ] && !checkPower() ){
+						res.redirect( '/login' );
+					} else {
+						next();
+					}
+					return;
+				}
+			} );
+			return;
+		}
+		if( req.path != '/' ){
+			if( needLogin[ req.path ] && !checkPower() ){
+				res.redirect( '/login' );
+			} else {
+				next();
+			}
+			return;
+		}
+		
         
     })
     app.get( '/', function( req, res ){

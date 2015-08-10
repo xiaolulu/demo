@@ -14,7 +14,8 @@ define( ['md5', 'all'], function( md5 ){
 	});
 
 	$.cookies.set('jxiao','is a good man');
-	alert( $.cookies.get('jxiao'));
+	alert( $.cookies.get('openid'));
+	
     $( '#loginForm' ).on( 'submit', function(){
         var data = {
             username: $('#username').val(),
