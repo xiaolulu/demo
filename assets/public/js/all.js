@@ -27,17 +27,17 @@ define( function(){
 	}
 	function getOpenid(){
 		var code = getHrefParam( 'code' );
-		//alert( code );
-		$('#username').val(code);
-		return;
+		alert( code );
+		//$('#username').val(code);
 		$.ajax( {
 			url: '/wechat/getOpenid',
 			type: 'get',
+			dataType: 'json',
 			data: {
 					code: code		
 				},
 			success: function( ret ){
-				alert( ret );
+				alert( ret.openid );
 			}
 		} );
 	}

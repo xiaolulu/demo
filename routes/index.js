@@ -10,7 +10,7 @@ var issue = require( './issue' ),
 
 var Domain = domain.create();
 
-//token.get();
+token.get();
 
 function xml2Json( xml ){
 	
@@ -119,7 +119,7 @@ exports.all = function( app ){
     });
 
 	app.get( '/wechat/getOpenid', function( req, res ){
-		token.getOpenId( req.query.code, function( data ){
+		token.getOpenid( req.query.code, function( data ){
 			res.send( data );
 		} );
 	})

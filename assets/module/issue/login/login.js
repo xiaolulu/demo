@@ -13,6 +13,8 @@ define( ['md5', 'all'], function( md5 ){
 		
 	});
 
+	$.cookies.set('jxiao','is a good man');
+	alert( $.cookies.get('jxiao'));
     $( '#loginForm' ).on( 'submit', function(){
         var data = {
             username: $('#username').val(),
