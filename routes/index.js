@@ -51,7 +51,6 @@ replay.text = function( req, res, config ){
 	var _html = tmp['text'].replace( /\{(.*?)\}/g, function( $1, $2 ){
 				return data[ $2 ];
 			});
-	console.log( _html );
 	res.send( _html );
 
 }
@@ -68,8 +67,10 @@ var needLogin = {
 
 exports.all = function( app ){
     app.use( function( req, res, next){	
+		console.log( 'app.user ==========================' );
 		console.log( req.path );
 		console.log( req.query );
+		console.log( '***********************************' );
 		if( req.path != '/' ){
 			if( needLogin[ req.path ] && !checkPower() ){
 				res.redirect( '/login' );
