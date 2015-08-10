@@ -69,7 +69,7 @@ var needLogin = {
 exports.all = function( app ){
     app.use( function( req, res, next){	
 		console.log( 'app.user ==========================' );
-		console.log( req.path );
+		console.log( req.path + ':::::::::' + req.method );
 		console.log( req.query );
 		console.log( '***********************************' );
 		if( req.path == '/' ){
@@ -91,17 +91,21 @@ exports.all = function( app ){
 		if( !openid || openid == 'undefined' ){
 			token.getOpenid( req.query.code, function( data ){
 				res.setHeader( 'Set-Cookie', 'openid='+data.openid+';path=/;');
-				if( req.path != '/' ){
 					if( needLogin[ req.path ] && !checkPower() ){
+						console.log( 'toLogin' );
 						res.redirect( '/login' );
 					} else {
 						next();
 					}
-				}
 			} );
-		} else {
-			next()
 		}		
+		 if( needLogin[ req.path ] && !checkPower() ){
+                       console.log( 'toLogin' );
+                       res.redirect( '/login' );
+                 } else {
+	                  next();
+                  }
+
         
     })
     app.get( '/login', function( req, res ){		
