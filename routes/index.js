@@ -71,9 +71,13 @@ exports.all = function( app ){
 		console.log( req.path );
 		console.log( req.query );
 		console.log( '***********************************' );
+
 		if( req.path != '/' ){
 			if( needLogin[ req.path ] && !checkPower() ){
-				res.redirect( '/login' );
+				token.getOpenid( req.query.code, function( data ){
+					res.setHeader( 'Set-Cookie', 'openid=data');
+					res.redirect( '/login' );
+				} );
 			} else {
 				next();
 			}
