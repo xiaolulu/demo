@@ -41,7 +41,7 @@ var tmp = {
 var replay = {};
 
 replay.event = function( req, res, config, cb ){
-	cb();	
+	cb(res);	
 }
 
 replay.text = function( req, res, config ){
@@ -59,7 +59,7 @@ replay.text = function( req, res, config ){
 
 function isBinded( key, cb ){
 		redis.get( key, function( reply ){
-			tool.logInfo.info( '[index] isOnline get reply ' + reply );
+			//tool.logInfo.info( '[index] isOnline get reply ' + reply );
 			cb( reply );
 		});
 	}
@@ -73,6 +73,7 @@ var needLogin = {
 
 exports.all = function( app ){
     app.use( function( req, res, next){	
+		//res.send(req.query.echostr);
 		console.log( 'app.user ==========================' );
 		console.log( req.path + ':::::::::' + req.method );
 		console.log( req.query );
@@ -86,15 +87,17 @@ exports.all = function( app ){
 				var xmlStr = bufferData.toBuffer().toString();
 				xml2js.parseString(xmlStr, { explicitArray : false, ignoreAttrs : true }, function (err, result) {
 					var ret = result;
-					replay[ ret.xml.MsgType ]( req, res, ret.xml, function(){ next()} ); 
+					replay[ ret.xml.MsgType ]( req, res, ret.xml, function(res){res.send(1)}  ); 
 				})
 			})
 			return;
 		}
 		var openid = tool.getCookie( req.headers.cookie, 'openid' );
 		console.log( 'openid === ' + openid );
+		console.log( 'oooopenid  ' + req.headers.cookie )
 		if( !openid || openid == 'undefined' ){
 			token.getOpenid( req.query.code, function( data ){
+				console.log( 'getOpenid '+data.openid );
 				res.setHeader( 'Set-Cookie', 'openid='+data.openid+';path=/;');
 				if( needLogin[ req.path ] ){
 					isBinded( openid, function( ret ){
@@ -107,8 +110,11 @@ exports.all = function( app ){
 					})
 				}
 			} );
+			return;
 		}		
+		console.log( 'user ====== next' )
 		if( needLogin[ req.path ] ){
+			console.log( 'user=========next1')
 			isBinded( openid, function( ret ){
 				if( !ret ){
 					console.log( 'toLogin' );
@@ -117,6 +123,9 @@ exports.all = function( app ){
 					next();
 				}
 			})
+		} else {
+			console.log( 'user============next222')
+			next();
 		}
         
     })

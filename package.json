@@ -4,6 +4,7 @@
 		"express": "*",
 		"ejs": "*",
 		"wechat": "*",
+		"redis": "*",
 		"wechat-api": "*",
 		"body-parser": "*",
 		"mongoose": "*",
