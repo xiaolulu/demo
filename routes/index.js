@@ -8,66 +8,26 @@ var issue = require( './issue' ),
 	token = require( '../lib/token' ),
 	redis = require( '../tool/redis' );
 	tool = require( '../lib/tool' ),
+	reply = require( '../lib/reply' ),
 	gadget = require( '../tool/gadget' );
 
 var Domain = domain.create();
 
 //token.get();
 
-function xml2Json( xml ){
-	
-	return json;
-}
 
 Domain.on( 'error', function( e ){
 	console.log( 'error' + e );
-})
-
-var path = {
-	'text': 'text',
-	'event': 'event'
-}
-
-var tmp = {
-	text: ['<xml>',
-			'<ToUserName><![CDATA[{toUser}]]></ToUserName>',
-			'<FromUserName><![CDATA[{fromUser}]]></FromUserName>',
-			'<CreateTime>12345678</CreateTime>',
-			'<MsgType><![CDATA[text]]></MsgType>',
-			'<Content><![CDATA[{content}]]></Content>',
-			'</xml>'].join('')
-}
-
-var replay = {};
-
-replay.event = function( req, res, config, cb ){
-	cb(res);	
-}
-
-replay.text = function( req, res, config ){
-	var data = {
-		toUser: config.FromUserName,
-		fromUser: config.ToUserName,
-		content: '你好'
-	}
-	var _html = tmp['text'].replace( /\{(.*?)\}/g, function( $1, $2 ){
-				return data[ $2 ];
-			});
-	res.send( _html );
-
-}
+});
 
 function isBinded( key, cb ){
-		console.log( 'isBinded key!!!!!!!!!!!' )
-		console.log( key )
-		redis.get( key, function( reply ){
-			console.log( 'isBinded Replay@@@@@@@@@@');
-			console.log(reply);
-			//tool.logInfo.info( '[index] isOnline get reply ' + reply );
-			cb( reply );
-		});
-	}
+		
+	redis.get( key, function( reply ){
+		
+		cb( reply );
 
+	});
+}
 
 var needLogin = {
 	'/user/join': 1,
@@ -75,90 +35,63 @@ var needLogin = {
 	'/user/partner': 1
 }
 
+function useLogin(req, res, next, ssoCookie, openid) {
+    if (needLogin[req.path]) {
+        if (ssoCookie) {
+            isBinded(ssoCookie, function(ret) {
+                if (!ret) {
+
+                   useLoginOpenid( req, res )
+
+                } else {
+                    if( req.path == '/user/join' ){
+						next();
+					} else if( ret.member == false ){
+						res.redirect( '/user/join' );
+					} else {
+						next();
+					}
+                }
+            })
+        } else {
+            useLoginOpenid( req, res )
+        }
+    } else {
+        next();
+    }
+}
+
+function useLoginOpenid( req, res ){
+	req.body = {
+        'openId': openid
+    };
+    user.loginWidthOpenid(req, res,
+    function(ret) {
+        if (ret.code != '0') {
+            res.redirect('/login');
+        } else {
+            res.redirect(req.path);
+        }
+    });
+}
+
 exports.all = function( app ){
     app.use( function( req, res, next){	
 		//res.send(req.query.echostr);
-		console.log( 'app.user ==========================' );
 		console.log( req.path + ':::::::::' + req.method );
-		console.log( req.query );
-		console.log( '***********************************' );
 		if( req.path == '/' ){
-			var bufferData = new BufferHelper();
-			req.on( 'data', function( chuck ){
-				bufferData.concat( chuck );
-			} );
-			req.on( 'end', function(){
-				var xmlStr = bufferData.toBuffer().toString();
-				xml2js.parseString(xmlStr, { explicitArray : false, ignoreAttrs : true }, function (err, result) {
-					var ret = result;
-					replay[ ret.xml.MsgType ]( req, res, ret.xml, function(res){res.sendStatus(1)}  ); 
-				})
-			})
+			reply( req, res );
 			return;
 		}
-		var openid = tool.getCookie( req.headers.cookie, 'openid' );
-		console.log( 'openid === ' + openid );
-		var ssoCookie = tool.getCookie( req.headers.cookie, 'sso_cookie');
-		console.log( 'oooopenid  ' + req.headers.cookie )
+		var openid = tool.getCookie( req.headers.cookie, 'openid' ),
+			ssoCookie = tool.getCookie( req.headers.cookie, 'sso_cookie');
 		if( !openid || openid == 'undefined' ){
 			token.getOpenid( req.query.code, function( data ){
-				console.log( 'getOpenid '+data.openid );
 				res.setHeader( 'Set-Cookie', 'openid='+data.openid+';path=/;');
-				if( needLogin[ req.path ] ){
-					isBinded( ssoCookie, function( ret ){
-						if( !ret ){
-							console.log( 'toLogin' );
-							res.redirect( '/login' );
-						} else {
-							next();
-						
-					})
-				}
+				useLogin( req, res, next, ssoCookie, openid );
 			} );
-			return;
-		}		
-		console.log( 'user ====== next' )
-		if( needLogin[ req.path ] ){
-			console.log( 'user=========next1')
-			if( ssoCookie ){
-
-			isBinded( ssoCookie, function( ret ){
-					if( !ret ){
-					 req.body = { 'openId': openid };
-					console.log('toLoginWithOpenid============================================')
-					console.log( req.path + ':::' + req.method );
-					//res.redirect( '/login' );
-	                                user.loginWidthOpenid(req,res,function(ret){
- 	                                       if( ret.code !='0'){
-        	                                        res.redirect( '/login' );
-               		                         } else{
-                       		                         res.redirect( req.path );
-                               		         }
-                                	} );
- 
-
-				} else {
-		
-					next();
-				}
-			})
-			} else {
-				req.body = { 'openId': openid };
-			console.log('toLoginWithOpenid=============i%%%%%%%%%%%%%%%%%%%%%%%%%%%%%===============================')
-                                        console.log( req.path + ':::' + req.method );
-
-				//res.redirect( '/login' );
-				user.loginWidthOpenid(req,res,function(ret){
-					if( ret.code !='0'){
-						res.redirect( '/login' );
-					} else{
-						res.redirect( req.path );
-					}
-				} );
-			}
 		} else {
-			console.log( 'user============next222')
-			next();
+			useLogin( req, res, next, ssoCookie, openid );
 		}
         
     })
