@@ -194,6 +194,7 @@ define(['all'], function(){
 			data: data,
 			dataType: 'json',
 			success: function( ret ){
+				alert( ret.code )
 				if( ret.code == 0 ){
 					$.cookies.set( 'corpname', corpName.val() );
 					window.location.href = '/user/info';

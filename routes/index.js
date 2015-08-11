@@ -80,6 +80,8 @@ exports.all = function( app ){
     app.use( function( req, res, next){	
 		//res.send(req.query.echostr);
 		console.log( req.path + ':::::::::' + req.method );
+		next();
+		return;
 		if( req.path == '/' ){
 			reply( req, res );
 			return;
