@@ -163,7 +163,7 @@ define(['all'], function(){
 	/******************************************
 	申请会员提交
 	********************************************/
-	$( '#joinForm' ).on( 'submit', function(){
+	$( '#userjoinBox' ).on( 'submit', function(){
 		
 		/*
 		if( validateAll() !== true ){

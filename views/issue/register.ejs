@@ -1,12 +1,14 @@
 <% include ../common/header.ejs %>
+<div class="registerBox">
    <form class="form registerForm" id="registerForm">
 		<label><tt></tt><input type="text" class="input_text" id="username" /></label>
 		<label class="clearfix">
 			<tt></tt>
-			<input type="text" class="input_text password fl" id="code" />
-			<input type="button" id="smsCodeBtn" class="code fr" value="获取短信验证码" />
+			<input type="text" class="input_text code fl" id="code" />
+			<input type="button" id="smsCodeBtn" class="codeBtn fr" value="获取短信验证码" />
 		</label>
 		<label><tt></tt><input type="text" class="input_text" id="password" /></label>
         <label><button type="submit" class="btn">注册</button></label>
     </form>
+</div>
 <% include ../common/footer.ejs %>
