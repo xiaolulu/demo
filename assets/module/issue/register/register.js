@@ -11,7 +11,8 @@ define( ['md5', 'validate', 'all'], function( md5, validate ){
 
 	var username = $( '#username' ),
 		password = $( '#password' ),
-		code = $( '#code' );
+		code = $( '#code' ),
+		codeBtn = $( '#smsCodeBtn' );
 
 	var usernameRule = [{
 			'noBlank': '请输入用户名',
@@ -44,9 +45,9 @@ define( ['md5', 'validate', 'all'], function( md5, validate ){
 
     $( '#registerForm' ).on( 'submit', function(){
         var data = {
-            username: username.val(),
+            phone: username.val(),
             password: md5.hex_md5( password.val() ),
-            code: code.val()  
+            smsCode: code.val()  
         }
         $.ajax({
             url: '/register',
@@ -61,5 +62,37 @@ define( ['md5', 'validate', 'all'], function( md5, validate ){
             }
         });
         return false;
-    })
+    });
+
+	codeBtn.on( 'click', function(){
+		fetchsmsCode();
+	});
+
+	function fetchsmsCode(){
+		
+		/*
+		if( validate( r_phone, RPhoneRule ) !== true ){
+			return false;
+		}
+		*/
+		var data = {
+				phone: username.val(),
+				source: 'register'
+			};
+		
+		$.ajax({
+			url: '/user/fetchSmsCode',
+			type: 'get',
+			dataType: 'json',
+			data: data,
+			success: function( ret ){
+				if( ret.code == 0 ){
+					//countdown()
+					return;
+				}
+				//dialog.show( DOC.errorCode[ ret.code ] || '未知错误[' + ret.code + ']' );
+			}
+		});
+
+	}
 });
