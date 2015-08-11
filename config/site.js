@@ -9,7 +9,7 @@ var siteTitle = '仟金顶网络科技',
 		    '/user/info': '会员信息',
 		    '/user/partner': '合作厂家'
 	    },
-       basePath = 'http://wx.upopen.com'; 
+       basePath = 'http://iwx.qjdchina.com'
 
 module.exports = {
 	siteTitle: siteTitle,
