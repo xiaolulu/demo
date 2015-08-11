@@ -12,7 +12,7 @@ var issue = require( './issue' ),
 	gadget = require( '../tool/gadget' );
 
 var Domain = domain.create();
-
+ 
 //token.get();
 
 
@@ -44,8 +44,10 @@ function useLogin(req, res, next, ssoCookie, openid) {
                    useLoginOpenid( req, res )
 
                 } else {
-                    if( req.path == '/user/join' ){
-						next();
+			ret = JSON.parse( ret );
+                    if( req.path == '/user/join' && ret.member == true ){
+			
+						res.redirect( '/user/info' );
 					} else if( ret.member == false ){
 						res.redirect( '/user/join' );
 					} else {
@@ -54,19 +56,18 @@ function useLogin(req, res, next, ssoCookie, openid) {
                 }
             })
         } else {
-            useLoginOpenid( req, res )
+            useLoginOpenid( req, res, openid )
         }
     } else {
         next();
     }
 }
 
-function useLoginOpenid( req, res ){
+function useLoginOpenid( req, res, openid ){
 	req.body = {
         'openId': openid
     };
-    user.loginWidthOpenid(req, res,
-    function(ret) {
+    user.loginWidthOpenid(req, res, function(ret) {
         if (ret.code != '0') {
             res.redirect('/login');
         } else {
