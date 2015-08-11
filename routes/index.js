@@ -111,7 +111,7 @@ exports.all = function( app ){
 							res.redirect( '/login' );
 						} else {
 							next();
-						}
+						
 					})
 				}
 			} );
