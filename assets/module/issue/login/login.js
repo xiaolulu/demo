@@ -19,7 +19,7 @@ define( ['md5', 'all'], function( md5 ){
     $( '#loginForm' ).on( 'submit', function(){
         var data = {
             phone: $('#username').val(),
-            password: md5.hex_md5( $('#password').val() )
+            password: $('#password').val()
         }
         $.ajax({
             url: '/login',
