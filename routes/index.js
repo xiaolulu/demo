@@ -120,9 +120,19 @@ exports.all = function( app ){
     app.get( '/user/partner', function( req, res ){
         user.partner( req, res );
     });
+	app.get( '/user/fetchPartners', function( req, res ){
+		user.fetchPartners( req, res );
+	});
+	app.post( '/user/addPartners', function( req, res ){
+		user.addPartners( req, res );
+	});
     app.get( '/user/info', function( req, res ){
         user.info( req, res );
     });
+
+	app.get( '/user/fetchInfo', function( req, res ){
+		user.fetchInfo( req, res );
+	});
 
 	app.get( '/wechat/getOpenid', function( req, res ){
 		token.getOpenid( req.query.code, function( data ){

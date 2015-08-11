@@ -12,6 +12,18 @@ function partner( req, res ){
     res.render( 'user/partner.ejs', site.setting( req ) );
 }
 
+function fetchPartners( req, res ){
+
+	user.fetchPartners( req, res );
+
+}
+
+function addPartners( req, res ){
+
+	user.addPartners( req, res );
+
+}
+
 function bindOpenid( req, res ){
 	user.bindOpenid( req, res );
 }
@@ -20,11 +32,18 @@ function loginWidthOpenid( req, res, cb ){
 	user.loginWidthOpenid( req, res, cb );
 }
 
+function fetchInfo( req, res ){
+
+	user.fetchInfo( req, res );
+
+}
+
 
 module.exports = {
 	bindOpenid: bindOpenid,
 	loginWidthOpenid: loginWidthOpenid,
     join: join,
     info: info,
+	fetchInfo: fetchInfo,
     partner: partner
 }
