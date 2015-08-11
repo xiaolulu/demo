@@ -1,4 +1,7 @@
-.userinfo h5{
+.userinfoBox{
+	padding: 12px;
+}
+.userinfoBox h5{
 	margin: 0px;
 	height: 18px;
 	line-height: 18px;
