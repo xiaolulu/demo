@@ -1,4 +1,6 @@
-
+*{
+	color: #3f3f3f;
+}
 .clearfix:after {
 	visibility: hidden;
 	display: block;
@@ -7,8 +9,6 @@
 	clear: both;
 	height: 0;
 }
-
-
 
 .ellipsis{
 	overflow: hidden;
@@ -21,14 +21,27 @@
 .clearfix { display: block; }
 .fl{ float: left }
 .fr{ float: right }
+button{
+	background: #ffc34d;
+	color: #fff;
+	border:none;
+	font-size: 14px;
+}
+
 /****************************/
 body{
-    background: #afafaf;
+    background: #ebebeb;
 }
 /***************************************************************/
 .wrapper{
-	padding: 10px;
 	background: #fff;
+}
+
+.input_text{
+	border: 1px solid #c7c9cf;
+	color: #3f3f3f;
+	height: 32px;
+	line-height: 32px;
 }
 
 
