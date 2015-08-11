@@ -58,7 +58,11 @@ replay.text = function( req, res, config ){
 }
 
 function isBinded( key, cb ){
+		console.log( 'isBinded key!!!!!!!!!!!' )
+		console.log( key )
 		redis.get( key, function( reply ){
+			console.log( 'isBinded Replay@@@@@@@@@@');
+			console.log(reply);
 			//tool.logInfo.info( '[index] isOnline get reply ' + reply );
 			cb( reply );
 		});
@@ -87,20 +91,21 @@ exports.all = function( app ){
 				var xmlStr = bufferData.toBuffer().toString();
 				xml2js.parseString(xmlStr, { explicitArray : false, ignoreAttrs : true }, function (err, result) {
 					var ret = result;
-					replay[ ret.xml.MsgType ]( req, res, ret.xml, function(res){res.send(1)}  ); 
+					replay[ ret.xml.MsgType ]( req, res, ret.xml, function(res){res.sendStatus(1)}  ); 
 				})
 			})
 			return;
 		}
 		var openid = tool.getCookie( req.headers.cookie, 'openid' );
 		console.log( 'openid === ' + openid );
+		var ssoCookie = tool.getCookie( req.headers.cookie, 'sso_cookie');
 		console.log( 'oooopenid  ' + req.headers.cookie )
 		if( !openid || openid == 'undefined' ){
 			token.getOpenid( req.query.code, function( data ){
 				console.log( 'getOpenid '+data.openid );
 				res.setHeader( 'Set-Cookie', 'openid='+data.openid+';path=/;');
 				if( needLogin[ req.path ] ){
-					isBinded( openid, function( ret ){
+					isBinded( ssoCookie, function( ret ){
 						if( !ret ){
 							console.log( 'toLogin' );
 							res.redirect( '/login' );
@@ -115,14 +120,42 @@ exports.all = function( app ){
 		console.log( 'user ====== next' )
 		if( needLogin[ req.path ] ){
 			console.log( 'user=========next1')
-			isBinded( openid, function( ret ){
-				if( !ret ){
-					console.log( 'toLogin' );
-					res.redirect( '/login' );
+			if( ssoCookie ){
+
+			isBinded( ssoCookie, function( ret ){
+					if( !ret ){
+					 req.body = { 'openId': openid };
+					console.log('toLoginWithOpenid============================================')
+					console.log( req.path + ':::' + req.method );
+					//res.redirect( '/login' );
+	                                user.loginWidthOpenid(req,res,function(ret){
+ 	                                       if( ret.code !='0'){
+        	                                        res.redirect( '/login' );
+               		                         } else{
+                       		                         res.redirect( req.path );
+                               		         }
+                                	} );
+ 
+
 				} else {
+		
 					next();
 				}
 			})
+			} else {
+				req.body = { 'openId': openid };
+			console.log('toLoginWithOpenid=============i%%%%%%%%%%%%%%%%%%%%%%%%%%%%%===============================')
+                                        console.log( req.path + ':::' + req.method );
+
+				//res.redirect( '/login' );
+				user.loginWidthOpenid(req,res,function(ret){
+					if( ret.code !='0'){
+						res.redirect( '/login' );
+					} else{
+						res.redirect( req.path );
+					}
+				} );
+			}
 		} else {
 			console.log( 'user============next222')
 			next();
@@ -142,6 +175,9 @@ exports.all = function( app ){
     app.post('/register', function( req, res ){
         issue.registerUser( req, res );
     });
+	app.post( '/bindUser', function( req, res ){
+		user.bindOpenid( req, res );
+	})
     app.get( '/user/join', function( req, res ){
         user.join( req, res );
     });

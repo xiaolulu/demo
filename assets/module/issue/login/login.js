@@ -13,7 +13,7 @@ define( ['md5', 'all'], function( md5 ){
 		
 	});
 
-	$.cookies.set('jxiao','is a good man');
+	//$.cookies.set('jxiao','is a good man');
 	//alert( $.cookies.get('openid'));
 	
     $( '#loginForm' ).on( 'submit', function(){
