@@ -150,7 +150,6 @@ define(['doc', 'validate', 'all'], function( DOC, validate ){
 			&& validate( email,       emailRule );
 
 	}
-	*/
 	/******************************************
 	申请会员提交
 	********************************************/
