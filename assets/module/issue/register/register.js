@@ -2,12 +2,12 @@ require.config({
 	baseUrl: basePath,
 	paths: {
 		all: 'public/js/all',
-		md5: 'core/js/md5',
-		validate: 'widget/validate/validate'
+		validate: 'widget/validate/validate',
+		doc: 'public/js/zhdoc'
 	}
 })
 
-define( ['md5', 'validate', 'all'], function( md5, validate ){
+define( ['validate', 'doc', 'all'], function( validate, DOC ){
 
 	var phone = $( '#username' ),
 		password = $( '#password' ),
@@ -92,13 +92,11 @@ define( ['md5', 'validate', 'all'], function( md5, validate ){
 
 	function fetchsmsCode(){
 		
-		/*
-		if( validate( r_phone, RPhoneRule ) !== true ){
+		if( validate( phone, phoneRule ) !== true ){
 			return false;
 		}
-		*/
 		var data = {
-				phone: username.val(),
+				phone: phone.val(),
 				source: 'register'
 			};
 		
@@ -111,6 +109,8 @@ define( ['md5', 'validate', 'all'], function( md5, validate ){
 				if( ret.code == 0 ){
 					//countdown()
 					return;
+				} else {
+					alert( DOC.errorCode[ ret.code ]);
 				}
 				//dialog.show( DOC.errorCode[ ret.code ] || '未知错误[' + ret.code + ']' );
 			}
