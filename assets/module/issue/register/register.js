@@ -107,7 +107,7 @@ define( ['validate', 'doc', 'all'], function( validate, DOC ){
 			data: data,
 			success: function( ret ){
 				if( ret.code == 0 ){
-					//countdown()
+					countdown()
 					return;
 				} else {
 					alert( DOC.errorCode[ ret.code ]);
@@ -115,6 +115,19 @@ define( ['validate', 'doc', 'all'], function( validate, DOC ){
 				//dialog.show( DOC.errorCode[ ret.code ] || '未知错误[' + ret.code + ']' );
 			}
 		});
+
+	}
+
+	var n = 60;
+	function countdown(){
+		
+		if( n-- ){
+			btnSmsCode.html( n + '秒后重新获取' ).attr( 'disabled', true );
+			setTimeout( countdown, 1000 )
+		} else {
+			n = 60;
+			btnSmsCode.html( '点击获取验证码' ).attr( 'disabled', false );
+		}
 
 	}
 });
