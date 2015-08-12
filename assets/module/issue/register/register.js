@@ -9,43 +9,65 @@ require.config({
 
 define( ['md5', 'validate', 'all'], function( md5, validate ){
 
-	var username = $( '#username' ),
+	var phone = $( '#username' ),
 		password = $( '#password' ),
 		code = $( '#code' ),
 		codeBtn = $( '#smsCodeBtn' );
 
-	var usernameRule = [{
-			'noBlank': '请输入用户名',
-			'min': [ 3, '用户名不能少于3位'],
-			'max': [ 16, '用户名长度不能多于16位'],
-			'typeEN': '用户名只能为字母及数字' 
-		}, function( prompt ){
-			$( '#usernameTip' ).html( prompt );
-		}],
-		passwordRule = [{
-			'noBlank': '请输入密码',
-			'self': function( cb ){
-				cb( '密码不能全为数字' );
-				return isNaN( this.value - 0 );
-			}
-		}, function( prompt ){
-			$( '#passwordTip' ).html( prompt );
-		}],
-		codeRule = [{
-			'noBlank': '请输入注册邮箱',
-			'typeEmail': '邮箱格式不正确'
-		}, function( prompt ){
-			$( '#codeTip' ).html( prompt );
-		}];
-	/*
-	validate( username, [ 'change' ], usernameRule );
+	var phoneRule = [
+			{ 
+				'noBlank': '请输入手机号码', 
+				'typePhone': '手机格式不正确'
+			}, function( prompt){
+				if( prompt ){
+					alert( prompt );
+				}
+			}	
+		],
+		smsCodeRule = [
+			{ 
+				'noBlank': '请输入手机验证码', 
+				'typeNum': '请输入数字', 
+				'min': [6, '不能少于6位'], 
+				'max': [6, '不能多于6位'] 
+			}, function( prompt){
+				if( prompt ){
+					alert( prompt );
+				}
+			} 
+		],
+		passwordRule = [
+			{ 
+				'noBlank': '请输入密码',
+				'min': [6, '密码不能少于6位'], 
+				'max': [16, '密码不能多于16位']
+			}, function( prompt){
+				if( prompt ){
+					alert( prompt );
+				}
+			} 	
+		];
+	
+	validate( phone, [ 'change' ], phoneRule );
 	validate( password, [ 'change' ], passwordRule );
-	validate( code, [ 'change' ], codeRule );
-	*/
+	validate( code, [ 'change' ], smsCodeRule );
+
+	function validateAll(){
+		
+		return validate( r_phone, RPhoneRule ) 		
+		&& validate( r_smsCode, RSmsCodeRule )
+		&& validate( r_password, RPasswordRule);
+
+	}
 
     $( '#registerForm' ).on( 'submit', function(){
+
+		if( validateAll() !== true ){
+			return false;
+		};
+
         var data = {
-            phone: username.val(),
+            phone: phone.val(),
             password: password.val(),
             smsCode: code.val()  
         }

@@ -1,11 +1,11 @@
 <% include ../common/header.ejs %>
 <div class="registerBox">
    <form class="form registerForm" id="registerForm">
-		<label><tt></tt><input placeHolder="请输入手机号" type="text" maxLength="11" class="input_text" id="username" /></label>
+		<label><tt></tt><input placeHolder="请输入手机号" type="tel" maxLength="11" class="input_text" id="username" /></label>
 		<label class="clearfix">
 			<tt></tt>
-			<input placeHolder="请输入短信验证码" type="text" class="input_text code fl" id="code" />
-			<input type="button" id="smsCodeBtn" class="codeBtn fr" value="获取短信验证码" />
+			<input placeHolder="请输入短信验证码" maxLength="6" type="tel" class="input_text code fl" id="code" />
+			<input type="button" id="smsCodeBtn" maxLength="16" class="codeBtn fr" value="获取短信验证码" />
 		</label>
 		<label><tt></tt><input placeHolder="请输入密码" type="text" class="input_text" id="password" /></label>
         <label><button type="submit" class="btn">注册</button></label>
