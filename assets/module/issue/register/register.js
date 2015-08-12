@@ -56,7 +56,7 @@ define( ['validate', 'doc', 'all'], function( validate, DOC ){
 	function validateAll(){
 		
 		return validate( phone, phoneRule ) 		
-		&& validate( smsCode, smsCodeRule )
+		&& validate( code, smsCodeRule )
 		&& validate( password, passwordRule);
 
 	}
@@ -81,7 +81,9 @@ define( ['validate', 'doc', 'all'], function( validate, DOC ){
                 if( ret.code == 0 ){
                     alert( '注册成功' )
                     window.location.href="/user/join";            
-                }   
+                } else {
+			alert( DOC.errorCode[ ret.code ]);
+		}   
             }
         });
         return false;
