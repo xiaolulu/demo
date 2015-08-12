@@ -12,6 +12,7 @@ define( ['validate', 'doc', 'all'], function( validate, DOC ){
 	var phone = $( '#username' ),
 		password = $( '#password' ),
 		code = $( '#code' ),
+		registerBtn = $( '#registerBtn' ),
 		codeBtn = $( '#smsCodeBtn' );
 
 	var phoneRule = [
@@ -54,9 +55,9 @@ define( ['validate', 'doc', 'all'], function( validate, DOC ){
 
 	function validateAll(){
 		
-		return validate( r_phone, RPhoneRule ) 		
-		&& validate( r_smsCode, RSmsCodeRule )
-		&& validate( r_password, RPasswordRule);
+		return validate( phone, phoneRule ) 		
+		&& validate( smsCode, smsCodeRule )
+		&& validate( password, passwordRule);
 
 	}
 
@@ -92,6 +93,10 @@ define( ['validate', 'doc', 'all'], function( validate, DOC ){
 
 	function fetchsmsCode(){
 		
+		if( codeBtn.attr( 'disabled' ) == 'disabled' ){
+			return;
+		}
+
 		if( validate( phone, phoneRule ) !== true ){
 			return false;
 		}
@@ -122,12 +127,34 @@ define( ['validate', 'doc', 'all'], function( validate, DOC ){
 	function countdown(){
 		
 		if( n-- ){
-			btnSmsCode.html( n + '秒后重新获取' ).attr( 'disabled', true );
+			codeBtn.html( n + '秒后重新获取' ).attr( 'disabled', true );
 			setTimeout( countdown, 1000 )
 		} else {
 			n = 60;
-			btnSmsCode.html( '点击获取验证码' ).attr( 'disabled', false );
+			codeBtn.html( '点击获取验证码' ).attr( 'disabled', false );
 		}
 
 	}
+
+	var _pwdView = true;
+
+	$( '.pwdView' ).on( 'click', function(){
+		if( _pwdView ){
+			this.innerHTML = 'A';
+			password.attr( 'type', 'text');
+		} else {
+			this.innerHTML = '*';
+			password.attr( 'type', 'password' );
+		}
+		_pwdView = !_pwdView;
+	});
+
+	$( '#agree' ).on( 'change', function(){
+		registerBtn.attr( 'disabled', !this.checked );
+		if( !this.checked ){
+			registerBtn.addClass( 'regBtnDisabled')
+		} else {
+			registerBtn.removeClass( 'regBtnDisabled')
+		}
+	})
 });

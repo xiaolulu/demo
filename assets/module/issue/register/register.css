@@ -27,14 +27,28 @@
 .registerForm .codeBtn{
 	width: 47%;
 	font-size: 14px;
-	height: 34px;
-	line-height: 32px;
+	height: 38px;
+	line-height: 38px;
 	background: #fff;
 	border: 1px solid #1fbbb3;
 	border-radius: 0;
+	text-align: center;
 	color: #1fbbb3;
 }
 
+.regBtnDisabled{
+	background: #afafaf;
+}
+
+.registerForm .pwdView{
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	//background: #f00;
+	height: 38px;
+	width: 38px;
+	text-align: center;
+	line-height: 38px;}
 .registerForm .agree{
 	font-size: 12px;
 }
