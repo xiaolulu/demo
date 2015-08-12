@@ -182,14 +182,16 @@ define(['doc', 'validate', 'area', 'all'], function( DOC, validate, Area ){
 		if( validateAll() !== true ){
 			return false;
 		}
+
+		var cityCode = city.attr( 'data' );
 		
 		var data = {
 			corpName          : corpName.val(),
 			corpRegisterYear  : registerYear.val(),
 			corpEmpNum        : size.val(),
-			provinceCode      : '33',//province.val(),
-			cityCode          : '3301',//city.val(),
-			areaCode          : '330102',//strict.val(),
+			provinceCode      : cityCode.slice( 0, 2 ),
+			cityCode          : cityCode.slice( 0, 4 ),
+			areaCode          : cityCode,
 			address           : address.val(),
 			regCode           : businessId.val(),
 			legalPersonName   : legalPerson.val(),

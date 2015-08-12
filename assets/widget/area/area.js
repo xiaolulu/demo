@@ -40,7 +40,7 @@ define([ 'areaData', 'base' ], function( areaData, base ){
 
 		province: function(){
 			var items = [];
-			var i = 0,
+			var i = 1,
 				c;
 				l = province.length;
 			for(; i < l; i++ ){
@@ -67,7 +67,7 @@ define([ 'areaData', 'base' ], function( areaData, base ){
 		city: function( key ){
 			var items = [],
 				_city = city[ key ];
-			var i = 0,
+			var i = 1,
 				c;
 				l = _city.length;
 			for(; i < l; i++ ){
@@ -101,7 +101,7 @@ define([ 'areaData', 'base' ], function( areaData, base ){
 		county: function( key ){
 			var items = [],
 				_county = county[ key ];
-			var i = 0,
+			var i = 1,
 				c;
 				l = _county.length;
 			for(; i < l; i++ ){
@@ -127,11 +127,28 @@ define([ 'areaData', 'base' ], function( areaData, base ){
 
 		fillIn: function( v ){
 			console.log( v );
-			this.fill.val( v );
+			this.hide();
+			v = v + '';
+			var _pcode = v.slice( 0, 2 ),
+				_ccode = v.slice( 0, 4 ),
+				txt = '';
+			if( ['11', '12', '31', '50', '71', '81', '82'].indexOf( _pcode ) > -1 ){
+				txt = province[ _pcode ] + city[ _pcode ][ v ]; 
+			} else {
+				txt = province[ _pcode ] + city[ _pcode ][ _ccode ] + county[ _ccode][ v ]
+			}
+			this.fill.val( txt );
+			this.fill.attr( 'data', v );
+			
+		},
+
+		hide: function(){
+
 			this.wrapper.hide();
 			this.mask.hide();
 			this.cityBox.html('').hide();
 			this.countyBox.html('').hide();
+
 		},
 
 		show: function(){
@@ -145,7 +162,11 @@ define([ 'areaData', 'base' ], function( areaData, base ){
 			var me = this;
 			this.source.on( 'click', function(){
 				me.show();
+			});
+			this.mask.on( 'click', function(){
+				me.hide();
 			})
+			
 		}
 
 
