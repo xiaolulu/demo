@@ -46,7 +46,7 @@ define( ['md5', 'validate', 'all'], function( md5, validate ){
     $( '#registerForm' ).on( 'submit', function(){
         var data = {
             phone: username.val(),
-            password: md5.hex_md5( password.val() ),
+            password: password.val(),
             smsCode: code.val()  
         }
         $.ajax({
