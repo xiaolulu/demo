@@ -32,14 +32,18 @@ define(['doc', 'validate', 'all'], function( DOC, validate ){
 				'min'    : [8, '不能少于8位'], 
 				'max'    : [25, '不能多于25位'] 
 			}, function( prompt){
-				$( '.join_prompt_corpName' ).html( prompt );
+				if( prompt ){
+					alert( prompt );
+				}
 			}	
 		],
 		cityRule = [
 			{ 
 				'noBlank': '请输入公司地址'
 			}, function( prompt){
-				$( '.join_prompt_address' ).html( prompt );
+				if( prompt ){
+					alert( prompt );
+				}
 			}	
 		],
 		addressRule = [
@@ -48,7 +52,9 @@ define(['doc', 'validate', 'all'], function( DOC, validate ){
 				'min'    : [1, '不能少于1位'], 
 				'max'    : [30, '不能多于30位'] 
 			}, function( prompt){
-				$( '.join_prompt_address' ).html( prompt );
+				if( prompt ){
+					alert( prompt );
+				}
 			}	
 		],
 		businessIdRule = [
@@ -58,7 +64,9 @@ define(['doc', 'validate', 'all'], function( DOC, validate ){
 				'min'    : [13, '不能少于13位'], 
 				'max'    : [15, '不能多于15位'] 
 			}, function( prompt){
-				$( '.join_prompt_businessId' ).html( prompt );
+				if( prompt ){
+					alert( prompt );
+				}
 			} 
 		],
 		partnerRule = [
@@ -68,7 +76,9 @@ define(['doc', 'validate', 'all'], function( DOC, validate ){
 				'min'    : [8, '不能少于8位'], 
 				'max'    : [25, '不能多于25位'] 
 			}, function( prompt){
-				$( '.join_prompt_partner' ).html( prompt );
+				if( prompt ){
+					alert( prompt );
+				}
 			} 
 		],
 		legalPersonRule = [
@@ -78,7 +88,9 @@ define(['doc', 'validate', 'all'], function( DOC, validate ){
 				'min'    : [2, '不能少于2位'], 
 				'max'    : [5, '不能多于5位'] 
 			}, function( prompt){
-				$( '.join_prompt_legalPerson' ).html( prompt );
+				if( prompt ){
+					alert( prompt );
+				}
 			} 
 		],
 		idCardRule = [
@@ -86,7 +98,9 @@ define(['doc', 'validate', 'all'], function( DOC, validate ){
 				'noBlank'   : '请输入身份证号', 
 				'typeIdCard': '身份证号无效'
 			}, function( prompt){
-				$( '.join_prompt_idCard' ).html( prompt );
+				if( prompt ){
+					alert( prompt );
+				}
 			} 
 		],
 		contactRule = [
@@ -96,7 +110,9 @@ define(['doc', 'validate', 'all'], function( DOC, validate ){
 				'min'    : [2, '不能少于2位'], 
 				'max'    : [5, '不能多于5位'] 
 			}, function( prompt){
-				$( '.join_prompt_contact' ).html( prompt );
+				if( prompt ){
+					alert( prompt );
+				}
 			} 
 		],
 		mobileRule = [
@@ -106,7 +122,9 @@ define(['doc', 'validate', 'all'], function( DOC, validate ){
 				'min'    : [11, '不能少于11位'], 
 				'max'    : [11, '不能多于11位'] 
 			}, function( prompt){
-				$( '.join_prompt_mobile' ).html( prompt );
+				if( prompt ){
+					alert( prompt );
+				}
 			} 
 		],
 		emailRule = [
@@ -114,7 +132,9 @@ define(['doc', 'validate', 'all'], function( DOC, validate ){
 				'noBlank'  : '请输入邮箱', 
 				'typeEmail': '邮箱格式不正确'
 			}, function( prompt){
-				$( '.join_prompt_email' ).html( prompt );
+				if( prompt ){
+					alert( prompt );
+				}
 			} 
 		];
 	
