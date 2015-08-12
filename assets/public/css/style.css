@@ -21,6 +21,7 @@
 .clearfix { display: block; }
 .fl{ float: left }
 .fr{ float: right }
+a{text-decoration: none}
 button{
 	background: #ffc34d;
 	color: #fff;
@@ -41,7 +42,9 @@ body{
 	border: 1px solid #c7c9cf;
 	color: #3f3f3f;
 	height: 32px;
+	font-size: 14px;
 	line-height: 32px;
+	border-radius: 0;
 }
 
 

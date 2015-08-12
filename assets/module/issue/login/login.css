@@ -6,7 +6,13 @@
 	display: block;
 	position: relative;
 	padding: 0px;
-	margin: 10px 0;
+	margin: 20px 0;
+}
+
+.loginForm label:first-child{
+
+	margin-top: 0px;
+
 }
 
 .loginForm label tt{
@@ -14,13 +20,17 @@
 }
 
 .loginForm .input_text{
-	width: 98%;
+	width: 95%;
 }
 
 .loginForm button{
 	height: 34px;
 	line-height: 28px;
 	width: 100%;
+}
+.linkTip{
+	color: #7a7a7a;
+	font-size: 12px;
 }
 
 .linkBtn{

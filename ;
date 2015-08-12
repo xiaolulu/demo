@@ -5,7 +5,7 @@
 		<label><tt></tt><input type="password" placeHolder="请输入密码" class="input_text" value="" id="password" /></label>
 		<label><button type="submit" class="btn">登&nbsp;&nbsp;录</button></label>
 	</form>
-	<p class="linkTip">还不是仟金顶会员?点击注册</p>
+	<p>还不是仟金顶会员?点击注册</p>
 	<a class="linkBtn" href="/register">注&nbsp;&nbsp;册</a>
 </div>
 <% include ../common/footer.ejs %>
