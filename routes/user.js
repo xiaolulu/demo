@@ -8,6 +8,10 @@ function info( req, res ){
     res.render( 'user/info.ejs', site.setting( req ) );
 }
 
+function apply( req, res ){
+	user.apply( req, res );
+}
+
 function partner( req, res ){
     res.render( 'user/partner.ejs', site.setting( req ) );
 }
@@ -56,8 +60,11 @@ module.exports = {
 	loginWidthOpenid: loginWidthOpenid,
     join: join,
     info: info,
+	apply: apply,
 	fetchInfo: fetchInfo,
 	fetchSmsCode: fetchSmsCode,
 	checkSmsCode: checkSmsCode,
+	fetchPartners: fetchPartners,
+	addPartners: addPartners,
     partner: partner
 }

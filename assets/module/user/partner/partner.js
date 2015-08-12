@@ -30,10 +30,8 @@ define(['doc','all'], function(DOC){
 	获取合作厂家
 	********************************************/
 	function fetchPartners(){
-		render( data );
-		return;
 		
-		//var data = {}
+		var data = {}
 		
 		$.ajax({
 			url: basePath + '/user/fetchPartners?' + Math.random(),

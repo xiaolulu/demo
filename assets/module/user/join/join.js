@@ -184,7 +184,7 @@ define(['all'], function(){
 			legalPersonCertId : idCard.val(),
 			contactName       : contact.val(),
 			mobile            : mobile.val(),
-			email             : email.val(),
+			email             : 'jianggc@126.com',
 			cats              : model.val() + ':' + partner.val()
 		};
 				

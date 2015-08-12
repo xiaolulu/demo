@@ -36,22 +36,28 @@ var needLogin = {
 }
 
 function useLogin(req, res, next, ssoCookie, openid) {
+	console.log( 'userLogin*********' + openid );
     if (needLogin[req.path]) {
         if (ssoCookie) {
             isBinded(ssoCookie, function(ret) {
                 if (!ret) {
 
-                   useLoginOpenid( req, res )
+                   useLoginOpenid( req, res, openid )
 
                 } else {
 			ret = JSON.parse( ret );
+			console.log( 'redis======================================')
+			console.log( ret )
                     if( req.path == '/user/join' && ret.member == true ){
 			
+						console.log( 11111111111)
 						res.redirect( '/user/info' );
-					} else if( ret.member == false ){
+					} else if( req.path != '/user/join' && ret.member == false ){
+						console.log( 222222222 )
 						res.redirect( '/user/join' );
 					} else {
 						next();
+						console.log( 'nextnet')
 					}
                 }
             })
@@ -80,14 +86,13 @@ exports.all = function( app ){
     app.use( function( req, res, next){	
 		//res.send(req.query.echostr);
 		console.log( req.path + ':::::::::' + req.method );
-		next();
-		return;
 		if( req.path == '/' ){
 			reply( req, res );
 			return;
 		}
 		var openid = tool.getCookie( req.headers.cookie, 'openid' ),
 			ssoCookie = tool.getCookie( req.headers.cookie, 'sso_cookie');
+		console.log( 'openid======' + openid );
 		if( !openid || openid == 'undefined' ){
 			token.getOpenid( req.query.code, function( data ){
 				res.setHeader( 'Set-Cookie', 'openid='+data.openid+';path=/;');
@@ -117,6 +122,9 @@ exports.all = function( app ){
     app.get( '/user/join', function( req, res ){
         user.join( req, res );
     });
+	app.post( '/user/apply', function( req, res ){
+		user.apply( req, res );
+	})
     app.get( '/user/partner', function( req, res ){
         user.partner( req, res );
     });

@@ -21,14 +21,13 @@ define(['all'], function(){
 	获取用户信息
 	********************************************/
 	function render( config ){
-		corpName.html( config.corpName );
 		businessId.html( config.regCode );
 		legalPerson.html( config.legalPersonName );
 		idCard.html( config.legalPersonCertId );
 		address.html(  config.address );
 		contact.html( config.contactName );
-		registerYear.val( config.corpRegisterYear );
-		size.val( config.corpEmpNum );
+		registerYear.html( config.corpRegisterYear );
+		size.html( config.corpEmpNum );
 		mobile.html( config.mobile );
 	}
 
