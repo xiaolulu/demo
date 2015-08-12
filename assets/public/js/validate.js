@@ -2,7 +2,7 @@
 require.config({
 	baseUrl: basePath,
 	paths: {
-		base: 'core/base'
+		base: 'core/js/base'
 	}
 })
 
