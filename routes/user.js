@@ -38,6 +38,18 @@ function fetchInfo( req, res ){
 
 }
 
+function fetchSmsCode( req, res ){
+
+	user.fetchSmsCode( req, res );
+
+}
+
+function checkSmsCode( req, res ){
+
+	user.checkSmsCode( req, res );
+
+}
+
 
 module.exports = {
 	bindOpenid: bindOpenid,
@@ -45,5 +57,7 @@ module.exports = {
     join: join,
     info: info,
 	fetchInfo: fetchInfo,
+	fetchSmsCode: fetchSmsCode,
+	checkSmsCode: checkSmsCode,
     partner: partner
 }

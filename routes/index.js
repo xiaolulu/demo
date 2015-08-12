@@ -129,6 +129,9 @@ exports.all = function( app ){
     app.get( '/user/info', function( req, res ){
         user.info( req, res );
     });
+	app.get( '/user/fetchSmsCode', function( req, res ){
+		user.fetchSmsCode( req, res );
+	})
 
 	app.get( '/user/fetchInfo', function( req, res ){
 		user.fetchInfo( req, res );
