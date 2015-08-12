@@ -5,7 +5,11 @@
 	display: block;
 	position: relative;
 	padding: 0px;
-	margin: 10px 0;
+	margin: 20px 0;
+}
+
+.registerForm label:first-child{
+	margin-top: 0px;
 }
 
 .registerForm label tt{
@@ -17,16 +21,26 @@
 }
 
 .registerForm .code{
-	width: 55%;
+	width: 45%;
 }
 
 .registerForm .codeBtn{
-	width: 40%;
+	width: 47%;
+	font-size: 14px;
 	height: 34px;
 	line-height: 32px;
 	background: #fff;
 	border: 1px solid #1fbbb3;
 	border-radius: 0;
+	color: #1fbbb3;
+}
+
+.registerForm .agree{
+	font-size: 12px;
+}
+
+.registerForm .agree a{
+	text-decoration: underline;
 	color: #1fbbb3;
 }
 
