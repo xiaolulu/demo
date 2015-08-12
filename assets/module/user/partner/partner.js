@@ -50,11 +50,12 @@ define(['doc','all'], function(DOC){
 		});
 
 	}
+	
+	var i = 0;
 
 	function render( data ){
 		
 		var els = [],
-			i   = 0,
 			l   = data.length;
 		while( i < l ){
 			els.push( create( data[i++], i ) );
@@ -64,8 +65,8 @@ define(['doc','all'], function(DOC){
 	}
 
 	var tmp = ['<span class="index fl">{index}</span>',
-				'<p class="info fr"><span class="company">[{model}]{factoryName}</span>',
-				'<span>{status}</span></p>'].join('');
+				'<p class="info fr"><span class="company">【{model}】{factoryName}</span>',
+				'<span class="status">审核状态：{status}</span></p>'].join('');
 	
 	function create( config, index ){
 		var status = '';
@@ -134,9 +135,9 @@ define(['doc','all'], function(DOC){
 			success: function( ret ){
 				if( ret.code == 0 ){
 					data.id = ret.data.id;
-					partnersGrid.append( create( data ) );
+					partnersGrid.append( create( data, ++i ) );
 					//promptDialog.show( '合作厂家添加成功' );
-					addNewPartnerHide();
+					//addNewPartnerHide();
 					return;
 				}
 

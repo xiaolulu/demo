@@ -8,6 +8,8 @@ define( function(){
 		jsApiList: []
 	});
 
+	window.companyName = $.cookies.get( 'corpname' );
+
 	wx.error( function( res ){
 		console.log( res );
 	});

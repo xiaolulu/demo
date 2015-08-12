@@ -1,8 +1,22 @@
 .userinfoBox{
 	padding: 12px;
 }
+
+.userinfoBox h2{
+	font-size: 22px;
+	font-weight: normal;
+	margin-top: 5px;
+}
+
+.userinfoBox .items{
+	padding: 7px 0px 7px 40px;
+	line-height: 24px;
+}
+
 .userinfoBox h5{
 	margin: 0px;
+	font-weight: normal;
 	height: 18px;
+	font-size: 14px !important;
 	line-height: 18px;
 }

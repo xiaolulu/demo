@@ -46,9 +46,9 @@ function useLogin(req, res, next, ssoCookie, openid) {
 
                 } else {
 			ret = JSON.parse( ret );
-			console.log( 'redis======================================')
-			console.log( ret )
+			res.setHeader( 'Set-Cookie', 'corpname='+ret.corpName+';path=/;');
                     if( req.path == '/user/join' && ret.member == true ){
+
 			
 						console.log( 11111111111)
 						res.redirect( '/user/info' );

@@ -16,6 +16,8 @@ define(['all'], function(){
 		registerYear= $( '#registerYear' ),
 		size        = $( '#size' ),
 		mobile      = $( '#mobile' );
+	
+	corpName.html( companyName );
 
 	/******************************************
 	获取用户信息
