@@ -1,0 +1,54 @@
+
+.wrapper{
+	background: #ebebeb;
+}
+
+.partnerItem{
+	background: #fff;
+	padding: 10px;
+	margin: 10px 0;
+}
+
+.partnerItem .index{
+	width: 20%;
+	display: block;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	font-size: 40px;
+}
+
+.partnerItem .info{
+	width: 78%;
+	display: block;
+	height: 50px;
+	margin: 0;
+}
+
+.partnerItem .company{
+	display: block;
+	height: 24px;
+	line-height: 24px;
+}
+
+.addModel{
+	height: 32px;
+	line-height: 32px;
+	width: 20%;
+}
+
+.addPartnerInfo{
+	padding: 10px 0;
+}
+
+.addPartnerInfo .input_text{
+	width: 75%;
+}
+
+.addPartnerBtn{
+	color: #fff;
+	background: #1fbbb3;
+	width: 100%;
+	height: 32px;
+	line-height: 32px;
+}

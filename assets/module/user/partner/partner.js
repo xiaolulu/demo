@@ -19,14 +19,22 @@ define(['doc','all'], function(DOC){
 		MODEL        = DOC.parterModelNum;
 
 	//$( '#corpName' ).html( corpName );
+
+	var data = [
+		{ categoryCode: 1, factoryName: '上海东芝电梯有限公司', authFile: 1 },
+		{ categoryCode: 1, factoryName: '上海东芝电梯有限公司', authFile: 1 },
+		{ categoryCode: 1, factoryName: '上海东芝电梯有限公司', authFile: 1 }
+	]
 	
 	/******************************************
 	获取合作厂家
 	********************************************/
 	function fetchPartners(){
+		render( data );
+		return;
 		
-		var data = {}
-
+		//var data = {}
+		
 		$.ajax({
 			url: basePath + '/user/fetchPartners?' + Math.random(),
 			type: 'get',
@@ -51,28 +59,31 @@ define(['doc','all'], function(DOC){
 			i   = 0,
 			l   = data.length;
 		while( i < l ){
-			els.push( create( data[i++] ) );
+			els.push( create( data[i++], i ) );
 		}
 		partnersGrid.append( els );
 
 	}
+
+	var tmp = ['<span class="index fl">{index}</span>',
+				'<p class="info fr"><span class="company">[{model}]{factoryName}</span>',
+				'<span>{status}</span></p>'].join('');
 	
-	function create( config ){
+	function create( config, index ){
 		var status = '';
+		config.index = index;
+		config.model = MODEL[ config.categoryCode ];
 	
 		if( config.authFile ){
 			config.status = '上传成功';
 		} else {
 			config.status = '未上传证书';
 		}
-		var _html = [
-			$( '<span>' ).html( MODEL[ config.categoryCode ] ), 
-			$( '<span>' ).html( config.factoryName ), 
-			$( '<span>' ).html( config.status )
-		];
+		var _html = tmp.replace( /\{(.*?)\}/g, function( $1, $2 ){
+				return config[ $2 ];
+			});
 		
-		return $( '<div>' ).append( html );
-
+		return $( '<div>' ).append( _html ).addClass( 'partnerItem clearfix' );
 	}
 	
 	/******************************************

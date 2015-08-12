@@ -1,11 +1,15 @@
 <% include ../common/header.ejs %>
+<div class="partnersBox">
 	<div class="partnersGrid" id="partnersGrid">
-
+		
 	</div>
    <form class="form" id="addPartner">
-        <select id="partnerModel">
-
-		</select>
-		<input type="text" id="partnerCompany" />
+		<div class="addPartnerInfo">
+		    <select id="partnerModel" class="addModel">
+			</select>
+			<input type="text" class="input_text" id="partnerCompany" />
+		</div>
+		<button type="submit" class="addPartnerBtn">提交</button>
     </form>
+</div>
 <% include ../common/footer.ejs %>
