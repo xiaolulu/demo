@@ -3,15 +3,15 @@ require.config({
 	baseUrl: basePath,
 	paths: {
 		all: 'public/js/all',
+		doc: 'public/js/zhdoc',
+		validate: 'public/js/validate'
 	}
 })
-define(['all'], function(){
+define(['doc', 'validate', 'all'], function( DOC, validate ){
    var corpName     = $( '#corpName' ),
 		registerYear = $( '#registerYear' ),
 		size         = $( '#size' ),
-		province     = $( '#province' ),
 		city         = $( '#city' ),
-		strict       = $( '#strict' ),
 		address      = $( '#address' ),
 		businessId   = $( '#businessId' ),
 		legalPerson  = $( '#legalPerson' ),
@@ -33,6 +33,13 @@ define(['all'], function(){
 				'max'    : [25, '不能多于25位'] 
 			}, function( prompt){
 				$( '.join_prompt_corpName' ).html( prompt );
+			}	
+		],
+		cityRule = [
+			{ 
+				'noBlank': '请输入公司地址'
+			}, function( prompt){
+				$( '.join_prompt_address' ).html( prompt );
 			}	
 		],
 		addressRule = [
@@ -110,10 +117,12 @@ define(['all'], function(){
 				$( '.join_prompt_email' ).html( prompt );
 			} 
 		];
-	/*
+	
 	validate( corpName,    [ 'change' ], corpNameRule );
 
 	validate( address,     [ 'change' ], addressRule );
+
+	validate( city,        [ 'change' ], cityRule );
 
 	validate( businessId,  [ 'change' ], businessIdRule );
 
@@ -126,31 +135,13 @@ define(['all'], function(){
 	validate( mobile,      [ 'change' ], mobileRule );
 
 	validate( email,       [ 'change' ], emailRule );
-
-	province.on( 'change', function(){
-		setTimeout( validateCity, 1 );
-	});
-
-	city.on( 'change', function(){
-		setTimeout( validateCity, 1 );
-	});
-
-	strict.on( 'change', function(){
-		setTimeout( validateCity, 1 );
-	});
-
-	function validateCity(){
-		if( province.val() == '0' || city.val() == '0' ||  ( strict.css( 'display' ) != 'none' && strict.val() == '0' ) ){
-			$( '.join_prompt_city' ).html( '地址不能为空' );
-			return false;
-		}
-		$( '.join_prompt_city' ).html( '' );
-	}
+	
 
 	function validateAll(){
 		
 		return validate( corpName,    corpNameRule )
 			&& validate( address,     addressRule )
+			&& validate( city,     	  cityRule )
 			&& validate( businessId,  businessIdRule )
 			&& validate( legalPerson, legalPersonRule )
 			&& validate( idCard,      idCardRule )
@@ -165,11 +156,10 @@ define(['all'], function(){
 	********************************************/
 	$( '#userjoinBox' ).on( 'submit', function(){
 		
-		/*
+		
 		if( validateAll() !== true ){
 			return false;
 		}
-		*/
 		
 		var data = {
 			corpName          : corpName.val(),
@@ -198,10 +188,9 @@ define(['all'], function(){
 				if( ret.code == 0 ){
 					$.cookies.set( 'corpname', corpName.val() );
 					window.location.href = '/user/info';
-					return;
+				} else {
+					alert( DOC.errorCode[ ret.code ] )
 				}
-				//dialog.show( DOC.errorCode[ ret.code ] || '系统错误: ' + ret.code, ret.code || 0 );
-				
 			}
 		});
 
