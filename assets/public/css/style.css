@@ -21,6 +21,9 @@
 .clearfix { display: block; }
 .fl{ float: left }
 .fr{ float: right }
+.hide{display:none}
+.show{display:block}
+li{list-style:none;}
 a{text-decoration: none}
 button{
 	background: #ffc34d;

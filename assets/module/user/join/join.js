@@ -4,10 +4,11 @@ require.config({
 	paths: {
 		all: 'public/js/all',
 		doc: 'public/js/zhdoc',
-		validate: 'public/js/validate'
+		validate: 'public/js/validate',
+		area: 'widget/area/area'
 	}
 })
-define(['doc', 'validate', 'all'], function( DOC, validate ){
+define(['doc', 'validate', 'area', 'all'], function( DOC, validate, Area ){
    var corpName     = $( '#corpName' ),
 		registerYear = $( '#registerYear' ),
 		size         = $( '#size' ),
@@ -21,6 +22,8 @@ define(['doc', 'validate', 'all'], function( DOC, validate ){
 		model		 = $( '#model' ),
 		partner      = $( '#model' ),
 		email        = $( '#email' );
+
+	new Area( { source: city, fill: city } );
 	
 	/******************************************
 	创建验证规则
@@ -203,7 +206,6 @@ define(['doc', 'validate', 'all'], function( DOC, validate ){
 			data: data,
 			dataType: 'json',
 			success: function( ret ){
-				alert( ret.code )
 				if( ret.code == 0 ){
 					$.cookies.set( 'corpname', corpName.val() );
 					window.location.href = '/user/info';
