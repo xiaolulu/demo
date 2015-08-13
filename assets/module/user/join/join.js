@@ -210,7 +210,7 @@ define(['doc', 'validate', 'area', 'all'], function( DOC, validate, Area ){
 			success: function( ret ){
 				if( ret.code == 0 ){
 					$.cookies.set( 'corpname', corpName.val() );
-					window.location.href = '/user/info';
+					window.location.href = '/user/welcome';
 				} else {
 					alert( DOC.errorCode[ ret.code ] )
 				}
@@ -244,6 +244,9 @@ define(['doc', 'validate', 'area', 'all'], function( DOC, validate, Area ){
 		//区域联动框
 		//area.initComplexArea( 'province', 'city', 'strict', '33', '3301', '330106' );
 		createYear();
+		if( location.hash == '#register' ){
+			alert( '注册成功，马上成为仟金宝会员！')
+		}
 
 	}();
 

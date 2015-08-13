@@ -10,6 +10,10 @@ function register( req, res ){
     res.render( 'issue/register.ejs', site.setting( req, '/issue' ) );
 }
 
+function welcome( req, res ){
+    res.render( 'issue/welcome.ejs', site.setting( req, '/issue' ) );
+}
+
 function registerUser( req, res ){
     user.register( req, res );
 }
@@ -25,6 +29,7 @@ function loginUser( req, res ){
 module.exports = {
     register: register,
     index: index,
+	welcome: welcome,
     registerUser: registerUser,
     login: login,
     loginUser: loginUser

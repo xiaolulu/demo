@@ -139,7 +139,11 @@ exports.all = function( app ){
     });
 	app.get( '/user/fetchSmsCode', function( req, res ){
 		user.fetchSmsCode( req, res );
-	})
+	});
+
+	app.get( '/welcome', function( req, res ){
+		issue.welcome( req, res );
+	});
 
 	app.get( '/user/fetchInfo', function( req, res ){
 		user.fetchInfo( req, res );
