@@ -3,10 +3,11 @@ require.config({
 	baseUrl: basePath,
 	paths: {
 		all: 'public/js/all',
+		validate: 'public/js/validate',
 		doc: 'public/js/zhdoc'
 	}
 })
-define(['doc','all'], function(DOC){
+define(['doc','validate','all'], function(DOC, validate){
    /******************************************
 	定义变量
 	********************************************/
@@ -18,13 +19,18 @@ define(['doc','all'], function(DOC){
 		company      = $( '#partnerCompany' ),
 		MODEL        = DOC.parterModelNum;
 
-	//$( '#corpName' ).html( corpName );
-
-	var data = [
-		{ categoryCode: 1, factoryName: '上海东芝电梯有限公司', authFile: 1 },
-		{ categoryCode: 1, factoryName: '上海东芝电梯有限公司', authFile: 1 },
-		{ categoryCode: 1, factoryName: '上海东芝电梯有限公司', authFile: 1 }
-	]
+	var companyRule = [
+		{ 
+			'noBlank': '请输入公司名称',
+			'typeZEI' : '只允许输入中英文',
+			'min': [8, '不能少于8位'], 
+			'max': [25, '不能多于25位'] 
+		}, function( prompt){
+			$( '.partner_company_prompt' ).html( prompt );
+		}	
+	];
+	
+	validate( company, [ 'change' ], companyRule );
 	
 	/******************************************
 	获取合作厂家
@@ -41,11 +47,9 @@ define(['doc','all'], function(DOC){
 			success: function( ret ){
 				if( ret.code == 0 ){
 					render( ret.data );
-					return;
+				} else {
+					alert( DOC.errorCode[ ret.code ] )
 				}
-
-				//dialog.show( DOC.errorCode[ ret.code ] || '系统错误: ' + ret.code, ret.code || 0 );
-				
 			}
 		});
 
@@ -106,7 +110,9 @@ define(['doc','all'], function(DOC){
 				'min': [8, '不能少于8位'], 
 				'max': [25, '不能多于25位'] 
 			}, function( prompt){
-				$( '.partner_company_prompt' ).html( prompt );
+				if( prompt ){
+					alert( prompt );
+				}
 			}	
 		];
 	
@@ -116,11 +122,10 @@ define(['doc','all'], function(DOC){
 	新增合作厂家
 	********************************************/
 	$( '#addPartner' ).on( 'submit', function(){
-		/*
+		
 		if( validate( company, companyRule ) !== true ){
 			return false;
 		}
-		*/
 
 		var data = {
 			categoryCode : model.val(),
@@ -136,13 +141,9 @@ define(['doc','all'], function(DOC){
 				if( ret.code == 0 ){
 					data.id = ret.data.id;
 					partnersGrid.append( create( data, ++i ) );
-					//promptDialog.show( '合作厂家添加成功' );
-					//addNewPartnerHide();
-					return;
+				} else {
+					alert( DOC.errorCode[ ret.code ] )
 				}
-
-				dialog.show( DOC.errorCode[ ret.code ] || '系统错误: ' + ret.code, ret.code || 0 );
-				
 			}
 		});
 
