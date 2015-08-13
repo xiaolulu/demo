@@ -29,7 +29,7 @@ define(['all'], function(){
 		address.html(  config.address );
 		contact.html( config.contactName );
 		registerYear.html( config.corpRegisterYear );
-		size.html( config.corpEmpNum );
+		size.html( ['50以下','50-500','500-1000','1000以上'][config.corpEmpNum] );
 		mobile.html( config.mobile );
 	}
 

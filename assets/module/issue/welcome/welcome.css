@@ -6,12 +6,15 @@ body{
 	text-align: center;
 	font-weight: normal;
 	margin: 0px;
+	margin: 10px 0 0 0;
+	font-size: 24px;
 }
 
 .welcome h3{
 	font-weight: normal;
 	text-align: center;
 	margin: 10px ;
+	font-size: 16px;
 }
 
 .welcome a{
