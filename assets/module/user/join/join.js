@@ -20,7 +20,7 @@ define(['doc', 'validate', 'area', 'all'], function( DOC, validate, Area ){
 		contact      = $( '#contact' ),
 		mobile       = $( '#mobile' ),
 		model		 = $( '#model' ),
-		partner      = $( '#model' ),
+		partner      = $( '#partner' ),
 		email        = $( '#email' );
 
 	new Area( { source: city, fill: city } );
@@ -31,9 +31,9 @@ define(['doc', 'validate', 'area', 'all'], function( DOC, validate, Area ){
 	var corpNameRule = [
 			{ 
 				'noBlank': '请输入公司名称',
-				'typeZEI' : '只允许输入中英文',
-				'min'    : [8, '不能少于8位'], 
-				'max'    : [25, '不能多于25位'] 
+				'typeZEI' : '公司名称只允许输入中英文',
+				'min'    : [8, '公司名称不能少于8位'], 
+				'max'    : [25, '公司名称不能多于25位'] 
 			}, function( prompt){
 				if( prompt ){
 					alert( prompt );
@@ -52,8 +52,8 @@ define(['doc', 'validate', 'area', 'all'], function( DOC, validate, Area ){
 		addressRule = [
 			{ 
 				'noBlank': '请输入公司地址',
-				'min'    : [1, '不能少于1位'], 
-				'max'    : [30, '不能多于30位'] 
+				'min'    : [1, '公司地址不能少于1位'], 
+				'max'    : [30, '公司地址不能多于30位'] 
 			}, function( prompt){
 				if( prompt ){
 					alert( prompt );
@@ -63,9 +63,9 @@ define(['doc', 'validate', 'area', 'all'], function( DOC, validate, Area ){
 		businessIdRule = [
 			{ 
 				'noBlank': '请输入工商注册号', 
-				'typeNum': '请输入数字', 
-				'min'    : [13, '不能少于13位'], 
-				'max'    : [15, '不能多于15位'] 
+				'typeNum': '工商注册号请输入数字', 
+				'min'    : [13, '工商注册号不能少于13位'], 
+				'max'    : [15, '工商注册号不能多于15位'] 
 			}, function( prompt){
 				if( prompt ){
 					alert( prompt );
@@ -75,9 +75,9 @@ define(['doc', 'validate', 'area', 'all'], function( DOC, validate, Area ){
 		partnerRule = [
 			{ 
 				'noBlank': '请输入合作厂家名称', 
-				'typeZEI' : '只允许输入中英文',
-				'min'    : [8, '不能少于8位'], 
-				'max'    : [25, '不能多于25位'] 
+				'typeZEI' : '合作厂家名称只允许输入中英文',
+				'min'    : [8, '合作厂家名称不能少于8位'], 
+				'max'    : [25, '合作厂家名称不能多于25位'] 
 			}, function( prompt){
 				if( prompt ){
 					alert( prompt );
@@ -87,9 +87,9 @@ define(['doc', 'validate', 'area', 'all'], function( DOC, validate, Area ){
 		legalPersonRule = [
 			{ 
 				'noBlank': '请输入法定代表人', 
-				'typeZh' : '请输入中文', 
-				'min'    : [2, '不能少于2位'], 
-				'max'    : [5, '不能多于5位'] 
+				'typeZh' : '法定代表人请输入中文', 
+				'min'    : [2, '法定代表人不能少于2位'], 
+				'max'    : [5, '法定代表人不能多于5位'] 
 			}, function( prompt){
 				if( prompt ){
 					alert( prompt );
@@ -109,9 +109,9 @@ define(['doc', 'validate', 'area', 'all'], function( DOC, validate, Area ){
 		contactRule = [
 			{ 
 				'noBlank': '请输入常用联系人', 
-				'typeZh' : '请输入中文', 
-				'min'    : [2, '不能少于2位'], 
-				'max'    : [5, '不能多于5位'] 
+				'typeZh' : '常用联系人请输入中文', 
+				'min'    : [2, '常用联系人不能少于2位'], 
+				'max'    : [5, '常用联系人不能多于5位'] 
 			}, function( prompt){
 				if( prompt ){
 					alert( prompt );
@@ -121,9 +121,7 @@ define(['doc', 'validate', 'area', 'all'], function( DOC, validate, Area ){
 		mobileRule = [
 			{ 
 				'noBlank': '请输入手机号码', 
-				'typePhone': '手机格式不正确', 
-				'min'    : [11, '不能少于11位'], 
-				'max'    : [11, '不能多于11位'] 
+				'typePhone': '手机格式不正确' 
 			}, function( prompt){
 				if( prompt ){
 					alert( prompt );
@@ -151,6 +149,8 @@ define(['doc', 'validate', 'area', 'all'], function( DOC, validate, Area ){
 
 	validate( legalPerson, [ 'change' ], legalPersonRule );
 
+	validate( partner,     [ 'change' ], partnerRule );
+
 	validate( idCard,      [ 'change' ], idCardRule );
 
 	validate( contact,     [ 'change' ], contactRule );
@@ -166,6 +166,7 @@ define(['doc', 'validate', 'area', 'all'], function( DOC, validate, Area ){
 			&& validate( address,     addressRule )
 			&& validate( city,     	  cityRule )
 			&& validate( businessId,  businessIdRule )
+			&& validate( partner, partnerRule )
 			&& validate( legalPerson, legalPersonRule )
 			&& validate( idCard,      idCardRule )
 			&& validate( contact,     contactRule )
@@ -210,7 +211,7 @@ define(['doc', 'validate', 'area', 'all'], function( DOC, validate, Area ){
 			success: function( ret ){
 				if( ret.code == 0 ){
 					$.cookies.set( 'corpname', corpName.val() );
-					window.location.href = '/user/welcome';
+					window.location.href = '/welcome';
 				} else {
 					alert( DOC.errorCode[ ret.code ] )
 				}
