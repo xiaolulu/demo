@@ -11,6 +11,40 @@
 .userinfoBox .items{
 	padding: 7px 0px 7px 40px;
 	line-height: 24px;
+	background: url( ./imgs/infoIcon.png ) no-repeat;
+	background-size: 30px;
+}
+
+.userinfoBox .itema{
+	background-position-y: 5px; 
+}
+
+.userinfoBox .itemb{
+	background-position-y: -50px;
+}
+
+.userinfoBox .itemc{
+	background-position-y: -105px;
+}
+
+.userinfoBox .itemd{
+	background-position-y: -160px;
+}
+
+.userinfoBox .iteme{
+	background-position-y: -215px;
+}
+
+.userinfoBox .itemf{
+	background-position-y: -270px;
+}
+
+.userinfoBox .itemg{
+	background-position-y: -321px;
+}
+
+.userinfoBox .itemh{
+	background-position-y: -375px;
 }
 
 .userinfoBox h5{
