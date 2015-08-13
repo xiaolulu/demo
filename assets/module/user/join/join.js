@@ -5,10 +5,11 @@ require.config({
 		all: 'public/js/all',
 		doc: 'public/js/zhdoc',
 		validate: 'public/js/validate',
-		area: 'widget/area/area'
+		area: 'widget/area/area',
+		mdialog: 'widget/mdialog/mdialog'
 	}
 })
-define(['doc', 'validate', 'area', 'all'], function( DOC, validate, Area ){
+define(['doc', 'validate', 'area', 'mdialog', 'all'], function( DOC, validate, Area, Mdialog ){
    var corpName     = $( '#corpName' ),
 		registerYear = $( '#registerYear' ),
 		size         = $( '#size' ),
@@ -237,6 +238,8 @@ define(['doc', 'validate', 'area', 'all'], function( DOC, validate, Area ){
 
 	}
 
+	var mdialog = new Mdialog();
+
 	/******************************************
 	入口
 	********************************************/
@@ -246,7 +249,7 @@ define(['doc', 'validate', 'area', 'all'], function( DOC, validate, Area ){
 		//area.initComplexArea( 'province', 'city', 'strict', '33', '3301', '330106' );
 		createYear();
 		if( location.hash == '#register' ){
-			alert( '注册成功，马上成为仟金宝会员！')
+			mdialog.show( '注册成功！<br />马上成长仟金顶会员，申请项目借款！' );
 		}
 
 	}();
