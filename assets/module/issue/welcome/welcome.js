@@ -7,7 +7,8 @@ require.config({
 	}
 })
 
-define( [], function(){
+define( ['all'], function(){
 
+	$( '#corpname' ).html( companyName || '仟金顶网络科技' ); 
 	
 });
