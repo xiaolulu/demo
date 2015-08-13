@@ -18,8 +18,8 @@
 }
 
 .Area_province li, .Area_city li, .Area_county li{
-	height: 32px;
-	line-height: 32px;
+	height: 38px;
+	line-height: 38px;
 	border-bottom: 1px solid #E4E3E3;
 	padding-left: 15px;
 }
