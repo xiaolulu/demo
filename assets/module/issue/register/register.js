@@ -80,7 +80,7 @@ define( ['validate', 'doc', 'all'], function( validate, DOC ){
             success: function( ret ){
                 if( ret.code == 0 ){
                     alert( '注册成功' )
-                    window.location.href="/user/join";            
+                    window.location.href="/user/join#register";            
                 } else {
 			alert( DOC.errorCode[ ret.code ]);
 		}   
