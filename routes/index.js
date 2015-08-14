@@ -36,7 +36,7 @@ var needLogin = {
 }
 
 function useLogin(req, res, next, ssoCookie, openid) {
-	console.log( 'userLogin*********' + openid );
+	console.log( 'function - userLogin = ' + openid );
     if (needLogin[req.path]) {
         if (ssoCookie) {
             isBinded(ssoCookie, function(ret) {
@@ -50,14 +50,11 @@ function useLogin(req, res, next, ssoCookie, openid) {
                     if( req.path == '/user/join' && ret.member == true ){
 
 			
-						console.log( 11111111111)
 						res.redirect( '/user/info' );
 					} else if( req.path != '/user/join' && ret.member == false ){
-						console.log( 222222222 )
 						res.redirect( '/user/join' );
 					} else {
 						next();
-						console.log( 'nextnet')
 					}
                 }
             })
@@ -85,18 +82,21 @@ function useLoginOpenid( req, res, openid ){
 exports.all = function( app ){
     app.use( function( req, res, next){	
 		//res.send(req.query.echostr);
+		
 		console.log( req.path + ':::::::::' + req.method );
+		console.log( req.query)
 		if( req.path == '/' ){
 			reply( req, res );
 			return;
 		}
+		console.log( console.log( req.headers.cookie ))
 		var openid = tool.getCookie( req.headers.cookie, 'openid' ),
 			ssoCookie = tool.getCookie( req.headers.cookie, 'sso_cookie');
 		console.log( 'openid======' + openid );
 		if( !openid || openid == 'undefined' ){
 			token.getOpenid( req.query.code, function( data ){
 				res.setHeader( 'Set-Cookie', 'openid='+data.openid+';path=/;');
-				useLogin( req, res, next, ssoCookie, openid );
+				useLogin( req, res, next, ssoCookie,  data.openid);
 			} );
 		} else {
 			useLogin( req, res, next, ssoCookie, openid );

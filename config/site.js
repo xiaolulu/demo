@@ -1,5 +1,5 @@
 
-var siteTitle = '仟金顶网络科技',
+var siteTitle = '仟金顶',
       pageTitle = {
 		    '/': '首页',
 		    '/index': '首页',
