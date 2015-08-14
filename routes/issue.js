@@ -26,11 +26,26 @@ function loginUser( req, res ){
     user.login( req, res );
 }
 
+function wiki( req, res ){
+    res.render( 'issue/wiki.ejs', site.setting( req, '/issue' ) );
+}
+
+function intro( req, res ){
+    res.render( 'issue/intro.ejs', site.setting( req, '/issue' ) );
+}
+
+function art( req, res ){
+    res.render( 'issue/art.ejs', site.setting( req, '/issue' ) );
+}
+
 module.exports = {
     register: register,
     index: index,
 	welcome: welcome,
     registerUser: registerUser,
     login: login,
+	art: art,
+	wiki: wiki,
+	intro: intro,
     loginUser: loginUser
 }

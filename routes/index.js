@@ -82,7 +82,8 @@ function useLoginOpenid( req, res, openid ){
 exports.all = function( app ){
     app.use( function( req, res, next){	
 		//res.send(req.query.echostr);
-		
+		next();
+		return;
 		console.log( req.path + ':::::::::' + req.method );
 		console.log( req.query)
 		if( req.path == '/' ){
@@ -153,5 +154,18 @@ exports.all = function( app ){
 		token.getOpenid( req.query.code, function( data ){
 			res.send( data );
 		} );
-	})
+	});
+
+	app.get( '/wiki', function( req, res ){
+		issue.wiki( req, res );
+	});
+
+	app.get( '/intro', function( req, res ){
+		issue.intro( req, res );
+	});
+
+	app.get( '/art', function( req, res ){
+		issue.art( req, res );
+	});
+	
 }

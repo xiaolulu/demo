@@ -6,11 +6,14 @@ var siteTitle = '仟金顶',
 		    '/register': '注册',
 		    '/login': '登录',
 			'/welcome': '欢迎',
+			'/intro': '介绍',
+			'/art': '活动',
+			'/wiki': '帮助',
 		    '/user/join': '会员申请',
 		    '/user/info': '会员信息',
 		    '/user/partner': '合作厂家'
 	    },
-       basePath = 'http://iwx.qjdchina.com';//
+       basePath = 'http://iwx.qjdchina.com';//'http://wx.upopen.com';// 
 
 module.exports = {
 	siteTitle: siteTitle,

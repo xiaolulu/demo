@@ -25,7 +25,7 @@ Scope为snsapi_userinfo
             }]
        },
 	   {
-           "name":"我的贷款",
+           "name":"我的借款",
            "sub_button":[
            {	
                "type":"view",
