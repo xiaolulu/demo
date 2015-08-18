@@ -4,21 +4,35 @@ var log4js       = require( 'log4js' ),
 	http         = require( 'http' ),
 	server       = require( '../config/server' ).server,
 	domain       = require('domain'),
-	toy			 = require( '../tool/toy' ),
 	BufferHelper = require( 'BufferHelper' );
+
+var logConfig = {
+	"appenders":[
+		{"type": "console","category":"console"},
+		{
+			"type": "dateFile",
+			"filename":"./log/",
+			"pattern":"yyyyMMdd.log",
+			"absolute":true,
+			"alwaysIncludePattern":true,
+			"category":"logInfo"
+		}
+	],
+	"levels":{"logInfo":"DEBUG"}
+}
+
+log4js.configure( logConfig );
+var logInfo = log4js.getLogger('logInfo');
 
 var Domain = domain.create();
 
 Domain.on( 'error', function( e ){
-
-	toy.log.error( 'http request: error=' + e );
-
+	//logInfo.info( '[tool] http async request error =======================' );
+	//logInfo.info( e );
 });
 
 function getCookie( cookie, name ){
-
 	try{
-
 		var cs = cookie.split(';'),
 			c,
 			item;
@@ -29,29 +43,23 @@ function getCookie( cookie, name ){
 			    return item[1];
 			}
 		}
-
 	} catch( e ){
-		
-		toy.log.error( 'getCookie: error=' + e );
 		return false;
-
 	}
     
 };
 
 /******************************* reqConfig ***************************************/
-function reqConfig( config, req, res, callback ){
-
+function reqConfig( config, req, res, callback, flag ){
+	console.log( 'reqconfig&&&&&&&&&&&&&&&&&&&');
+	console.log( req.path + '#####' + req.method );
 	req.headers.host = server.hostname;
 	
 	var method = config.method || 'POST';
 
 	var	path   = config.path + ( ( method.toUpperCase() == 'GET' ) ? '?' + qs.stringify( req.query ) : '' );
-
 	if( method.toUpperCase() == 'POST' ){
-
 		req.headers['content-length'] = qs.stringify(req.body).length;
-
 	}
 	var options = {
 			host     : server.host,
@@ -63,47 +71,55 @@ function reqConfig( config, req, res, callback ){
 		bufferData = new BufferHelper(),
 		httpreq;
 
-	
-	Domain.run( function(){
+	console.log( options );
+	//Domain.run( function(){
 	
 		httpreq = http.request( options, function( httpres ) {
-
-			res.setHeader("set-cookie", httpres.headers['set-cookie'] );
-
+			var cookies = httpres.headers['set-cookie'];
+			console.log( 'java cookie ===================')
+			console.log( 'optioins' + options.path )
+			console.log( cookies );
+			cookies && res.setHeader("Set-Cookie",cookies );
+			if( flag ){
+				httpres.pipe( res );
+				return;
+			}
+			
 			httpres.on( 'data', function ( data ) {
-
 				bufferData.concat( data );
-
 			} );
 
 			httpres.on( 'end', function(){
-
+				console.log( bufferData.toBuffer().toString())
 				callback( bufferData );
-				toy.log.info( 'http request: ret=' + JSON.parse( bufferData ) );
-
 			});
 
 		} );
 	
-	} );
+	//} );
 	
 	httpreq.on('error', function(e) {
 
-		ctoy.log.info( 'http request: error=' + e );
+		console.log('problem with request: ' + e.message);
+		//logInfo.error( '[tool] request error ======================================= ' );
+		//logInfo.error( e.message );
+		callback( '{"code": "-1", "msg": "server error"}' );
 
 	});
+	console.log( 'reqConfig body******************************' );
+	console.log( req.body );
 	
 	httpreq.write( qs.stringify( req.body ) );
-
 	httpreq.end();
 
-	toy.log.info( 'http request: option=' + options );
+	//logInfo.info( options );
 
 }
 
 module.exports = {
 
     getCookie: getCookie,
-	reqConfig: reqConfig
+	reqConfig: reqConfig,
+	log: log
 
 }

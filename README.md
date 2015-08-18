@@ -16,7 +16,7 @@ Scope为snsapi_userinfo
             {
                "type":"view",
                "name":"仟金宝",
-               "url":"http://iwx.qjdchina.com/us"
+               "url":"http://iwx.qjdchina.com/intro"
             },
             {
                "type":"view",
@@ -49,7 +49,7 @@ Scope为snsapi_userinfo
            {	
                "type":"view",
                "name":"申请会员",
-               "url":"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxfb96cc74703eb978&redirect_uri=http%3A%2F%2Fiwx.qjdchina.com%2Fuser%2Fjoin&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
+               "url":"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxfb96cc74703eb978&redirect_uri=http%3A%2F%2Fwx.upopen.cn%2Fuser%2Fjoin&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
             },
             {
                "type":"view",

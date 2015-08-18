@@ -1,5 +1,5 @@
 module.exports = {
-    '/user/center' : 1,
-    '/user/info': 1,
-    '/user/blog': 1
+    '/user/join': 1,
+	'/user/info': 1,
+	'/user/partner': 1
 }
