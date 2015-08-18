@@ -20,7 +20,8 @@
 }
 
 .loginForm .input_text{
-	width: 95%;
+	width: 96%;
+	padding: 0px 5px;
 }
 
 .loginForm button{
@@ -42,4 +43,8 @@
 	text-align: center;
 	height: 32px;
 	line-height: 32px;
+}
+
+.linkBtn:visited{
+	color: #ffc34d;
 }

@@ -21,6 +21,7 @@
 .userjoinForm .input_text{
 	width: 67%;
 	font-size: 12px;
+	padding: 3px 5px;
 	height: 26px;
 	line-height: 28px;
 	float: right;
@@ -28,9 +29,11 @@
 
 .userjoinForm select{
 	height: 28px;
-	width: 72%;
+	padding: 2px 3px;
+	width: 71%;
+	float: right;
 	border-radius: 0;
-	margin-left: 6px;
+	margin-left: 0px;
 }
 
 .userjoinForm button{

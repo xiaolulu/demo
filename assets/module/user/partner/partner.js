@@ -42,9 +42,8 @@ define(['doc','validate','all'], function(DOC, validate){
 	获取合作厂家
 	********************************************/
 	function fetchPartners(){
-		render( data );
-		return;
-		//var data = {}
+
+		var data = {}
 		
 		$.ajax({
 			url: basePath + '/user/fetchPartners?' + Math.random(),
@@ -150,6 +149,7 @@ define(['doc','validate','all'], function(DOC, validate){
 				if( ret.code == 0 ){
 					data.id = ret.data.id;
 					partnersGrid.append( create( data, ++i ) );
+					company.val('');
 				} else {
 					alert( DOC.errorCode[ ret.code ] )
 				}

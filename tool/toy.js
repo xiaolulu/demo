@@ -87,8 +87,10 @@ function reqConfig( config, req, res, callback ){
 	
 		httpreq = http.request( options, function( httpres ) {
 
+			var cookie = httpres.headers[ 'set-cookie' ];
 
-			//res.setHeader("set-cookie", httpres.headers['set-cookie'] );
+			console.log( cookie );
+			cookie && res.setHeader( 'Set-Cookie', cookie );
 
 			httpres.on( 'data', function ( data ) {
 

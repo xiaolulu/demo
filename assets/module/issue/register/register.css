@@ -17,7 +17,8 @@
 }
 
 .registerForm .input_text{
-	width: 95%;
+	width: 96%;
+	padding:3px 5px;
 }
 
 .registerForm .code{
@@ -43,17 +44,15 @@
 .registerForm .pwdView{
 	position: absolute;
 	right: 0px;
-	top: 1px;
+	top: 3px;
 	background: url( ./imgs/passwordIcon.png ) 0 5px no-repeat;
-	height: 34px;
-	width: 34px;
-	text-align: center;
-	line-height: 38px;
-	background-size: 60%;
+	height: 31px;
+	width: 31px;
+	background-size: 80%;
 }
 
 .registerForm .pwdView_hide{
-	background-position: 0px -30px;
+	background-position: 0px -40px;
 }
 
 .registerForm .agree{
