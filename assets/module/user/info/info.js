@@ -17,13 +17,12 @@ define(['all'], function(){
 		size        = $( '#size' ),
 		mobile      = $( '#mobile' );
 	
-	corpName.html( companyName );
-
 	/******************************************
 	获取用户信息
 	********************************************/
 	function render( config ){
 		businessId.html( config.regCode );
+		corpName.html( config.corpName );
 		legalPerson.html( config.legalPersonName );
 		idCard.html( config.legalPersonCertId );
 		address.html(  config.address );

@@ -77,7 +77,7 @@ function useLoginOpenid( req, res, openid ){
         'openId': openid
     };
 
-    user.loginWidthOpenid( req, res, function( ret ){
+    user.loginWithOpenid( req, res, function( ret ){
 		
         if (ret.code != '0') {
 

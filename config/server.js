@@ -6,7 +6,7 @@ module.exports = {
 	wechat: {
 		host: 'https://api.weixin.qq.com',
 		appid: 'wxfb96cc74703eb978',
-		appsecret: 'd49d5f6febd267637d85c56af4370bce',
+		secret: 'd49d5f6febd267637d85c56af4370bce',
 		pathToken: '/cgi-bin/token'
 	},
 	server: {

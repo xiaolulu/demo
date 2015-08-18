@@ -83,12 +83,12 @@ function reqConfig( config, req, res, callback ){
 		bufferData = new BufferHelper(),
 		httpreq;
 
-	
 	Domain.run( function(){
 	
 		httpreq = http.request( options, function( httpres ) {
 
-			res.setHeader("set-cookie", httpres.headers['set-cookie'] );
+
+			//res.setHeader("set-cookie", httpres.headers['set-cookie'] );
 
 			httpres.on( 'data', function ( data ) {
 
@@ -112,7 +112,7 @@ function reqConfig( config, req, res, callback ){
 		ctoy.log.info( 'http request: error=' + e );
 
 	});
-	
+
 	httpreq.write( qs.stringify( req.body ) );
 
 	httpreq.end();

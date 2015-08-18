@@ -43,9 +43,9 @@ function bindOpenid( req, res ){
 
 }
 
-function loginWidthOpenid( req, res, cb ){
+function loginWithOpenid( req, res, cb ){
 
-	user.loginWidthOpenid( req, res, cb );
+	user.loginWithOpenid( req, res, cb );
 
 }
 
@@ -70,7 +70,7 @@ function checkSmsCode( req, res ){
 
 module.exports = {
 	bindOpenid: 		bindOpenid,
-	loginWidthOpenid: 	loginWidthOpenid,
+	loginWithOpenid: 	loginWithOpenid,
     join: 				join,
     info: 				info,
 	apply: 				apply,
