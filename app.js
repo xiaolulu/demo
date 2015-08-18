@@ -19,7 +19,6 @@ routes.all( app );
 
 server.listen( app.get( 'port'), function(){
 	toy.log.info( 'server start ' + app.get( 'port' ) );
-	toy.log.error( 'server start ' + app.get( 'port' ) );
 	console.log( 'server start ' + app.get( 'port' ) );
 });
 
