@@ -31,13 +31,20 @@ define(['doc','validate','all'], function(DOC, validate){
 	];
 	
 	validate( company, [ 'change' ], companyRule );
+
+	var data = [
+		{categoryCode:1,factoryName:'海尔电器有限公司',authFile:0},
+		{categoryCode:1,factoryName:'海尔电器有限公司',authFile:1},
+		{categoryCode:1,factoryName:'海尔电器有限公司',authFile:0}
+	]
 	
 	/******************************************
 	获取合作厂家
 	********************************************/
 	function fetchPartners(){
-		
-		var data = {}
+		render( data );
+		return;
+		//var data = {}
 		
 		$.ajax({
 			url: basePath + '/user/fetchPartners?' + Math.random(),
@@ -69,8 +76,8 @@ define(['doc','validate','all'], function(DOC, validate){
 	}
 
 	var tmp = ['<span class="index fl">{index}</span>',
-				'<p class="info fr"><span class="company">【{model}】{factoryName}</span>',
-				'<span class="status">审核状态：{status}</span></p>'].join('');
+				'<p class="info fr"><span class="company">{factoryName}</span>',
+				'<span class="model">【{model}】</span><span class="status {statusCls}">审核状态：{status}</span></p>'].join('');
 	
 	function create( config, index ){
 		var status = '';
@@ -79,8 +86,10 @@ define(['doc','validate','all'], function(DOC, validate){
 	
 		if( config.authFile ){
 			config.status = '上传成功';
+			config.statusCls = '';
 		} else {
 			config.status = '未上传证书';
+			config.statusCls = 'statusb';
 		}
 		var _html = tmp.replace( /\{(.*?)\}/g, function( $1, $2 ){
 				return config[ $2 ];
