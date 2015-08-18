@@ -7,7 +7,7 @@ var issue     	= require( './issue' ),
 	token 	  	= require( '../lib/token' ),
 	redis 		= require( '../tool/redis' );
 	toy   		= require( '../tool/toy' ),
-	reply 		= require( '../lib/reply' ),;
+	reply 		= require( '../lib/reply' );
 
 var Domain = domain.create();
  

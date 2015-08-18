@@ -120,6 +120,6 @@ module.exports = {
 
     getCookie: getCookie,
 	reqConfig: reqConfig,
-	log: log
+	log: logInfo
 
 }
