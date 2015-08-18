@@ -56,6 +56,12 @@ function art( req, res ){
 
 }
 
+function protocol( req, res ){
+
+	res.render( 'issue/protocol.ejs', site.setting( req, '/issue' ) );
+
+}
+
 module.exports = {
     register: 		register,
     index: 			index,
@@ -65,5 +71,6 @@ module.exports = {
 	art: 			art,
 	wiki: 			wiki,
 	intro: 			intro,
+	protocol:		protocol,
     loginUser: 		loginUser
 }

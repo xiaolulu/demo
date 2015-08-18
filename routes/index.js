@@ -250,5 +250,11 @@ exports.all = function( app ){
 		issue.art( req, res );
 
 	});
+
+	app.get( '/protocol', function( req, res ){
+
+		issue.protocol( req, res );
+
+	});
 	
 }
