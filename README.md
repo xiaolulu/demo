@@ -11,7 +11,7 @@ Scope为snsapi_userinfo
            {	
                "type":"view",
                "name":"优惠.活动",
-               "url":"http://iwx.qjdchina.com/act"
+               "url":"http://iwx.qjdchina.com/art"
             },
             {
                "type":"view",

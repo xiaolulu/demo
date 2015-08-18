@@ -142,11 +142,11 @@ define( ['validate', 'doc', 'all'], function( validate, DOC ){
 
 	$( '.pwdView' ).on( 'click', function(){
 		if( _pwdView ){
-			this.innerHTML = 'A';
 			password.attr( 'type', 'text');
+			$( '.pwdView' ).removeClass( 'pwdView_hide' );
 		} else {
-			this.innerHTML = '*';
 			password.attr( 'type', 'password' );
+			$( '.pwdView' ).addClass( 'pwdView_hide' );
 		}
 		_pwdView = !_pwdView;
 	});
