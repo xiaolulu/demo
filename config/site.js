@@ -9,6 +9,7 @@ var siteTitle = '仟金顶',
 			'/intro': '介绍',
 			'/art': '活动',
 			'/wiki': '帮助',
+			'/protocol': '法律协议',
 		    '/user/join': '会员申请',
 		    '/user/info': '会员信息',
 		    '/user/partner': '合作厂家'

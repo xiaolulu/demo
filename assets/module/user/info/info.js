@@ -3,9 +3,10 @@ require.config({
 	baseUrl: basePath,
 	paths: {
 		all: 'public/js/all',
+		area: 'widget/area/areaData',
 	}
 })
-define(['all'], function(){
+define(['area','all'], function( area ){
 
 	var corpName    = $( '#corpName' ),
 		businessId  = $( '#businessId' ),
@@ -25,7 +26,7 @@ define(['all'], function(){
 		corpName.html( config.corpName );
 		legalPerson.html( config.legalPersonName );
 		idCard.html( config.legalPersonCertId );
-		address.html(  config.address );
+		address.html(  area.area_array[ config.provinceCode ] + area.sub_array[ config.provinceCode ][ config.cityCode] + ( area.sub_arr[ config.cityCode ] ? area.sub_arr[ config.cityCode][ config.areaCode ] : '' ) + config.address );
 		contact.html( config.contactName );
 		registerYear.html( config.corpRegisterYear );
 		size.html( ['50以下','50-500','500-1000','1000以上'][config.corpEmpNum] );

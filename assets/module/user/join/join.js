@@ -26,6 +26,8 @@ define(['doc', 'validate', 'area', 'mdialog', 'all'], function( DOC, validate, A
 
 	new Area( { source: city, fill: city } );
 	
+	mobile.val( $.cookies.get( 'username' ) || '' );
+	
 	/******************************************
 	创建验证规则
 	********************************************/
@@ -185,15 +187,23 @@ define(['doc', 'validate', 'area', 'mdialog', 'all'], function( DOC, validate, A
 			return false;
 		}
 
-		var cityCode = city.attr( 'data' );
+		var cityCode = city.attr( 'data' ),
+			_provinceCode = cityCode.slice( 0, 2 ),
+			_cityCode = cityCode.slice( 0, 4 ),
+			_areaCode = cityCode;
+		
+		if( ['11','12','31','50','71','81','82'].indexOf( _provinceCode ) > -1 ){
+			_cityCode = _areaCode;
+			_areaCode = 0;
+		}	
 		
 		var data = {
 			corpName          : corpName.val(),
 			corpRegisterYear  : registerYear.val(),
 			corpEmpNum        : size.val(),
-			provinceCode      : cityCode.slice( 0, 2 ),
-			cityCode          : cityCode.slice( 0, 4 ),
-			areaCode          : cityCode,
+			provinceCode      : _provinceCode,
+			cityCode          : _cityCode,
+			areaCode          : _areaCode,
 			address           : address.val(),
 			regCode           : businessId.val(),
 			legalPersonName   : legalPerson.val(),

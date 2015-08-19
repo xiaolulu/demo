@@ -103,6 +103,7 @@ exports.all = function( app ){
 		//return;
 
 		console.log( req.path + ':::::::::' + req.method );
+		console.log( req.headers.cookie );
 		toy.log.info( 'first: req.path=' + req.path + ';req.method=' + req.method );
 
 		if( req.path == '/' ){
