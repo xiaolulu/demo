@@ -101,7 +101,7 @@ function reqConfig( config, req, res, callback ){
 			httpres.on( 'end', function(){
 
 				callback( bufferData );
-				toy.log.info( 'http request: ret=' + JSON.parse( bufferData ) );
+				toy.log.info( 'http request: ret=' + JSON.stringify( JSON.parse( bufferData ) ) );
 
 			});
 
@@ -119,7 +119,7 @@ function reqConfig( config, req, res, callback ){
 
 	httpreq.end();
 
-	toy.log.info( 'http request: option=' + options );
+	toy.log.info( 'http request: option=' + JSON.stringify( options ) );
 
 }
 

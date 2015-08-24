@@ -75,7 +75,7 @@ define(['doc','validate','all'], function(DOC, validate){
 	}
 
 	var tmp = ['<span class="index fl">{index}</span>',
-				'<p class="info fr"><span class="company">{factoryName}</span>',
+				'<p class="info fr"><span class="company ellipsis">{factoryName}</span>',
 				'<span class="model">【{model}】</span><span class="status {statusCls}">审核状态：{status}</span></p>'].join('');
 	
 	function create( config, index ){
