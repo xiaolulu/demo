@@ -212,6 +212,12 @@ exports.all = function( app ){
 
 	});
 
+	app.get( '/loan/:path', function( req, res ){
+
+		res.redirect( '/welcome#ready' );
+
+	});
+
 	app.get( '/welcome', function( req, res ){
 
 		issue.welcome( req, res );
