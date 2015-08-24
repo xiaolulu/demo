@@ -101,8 +101,8 @@ define(['doc', 'validate', 'area', 'mdialog', 'all'], function( DOC, validate, A
 		],
 		idCardRule = [
 			{ 
-				'noBlank'   : '请输入身份证号', 
-				'typeIdCard': '身份证号无效'
+				'noBlank'   : '请输入身份证号' 
+				//'typeIdCard': '身份证号无效'
 			}, function( prompt){
 				if( prompt ){
 					alert( prompt );
